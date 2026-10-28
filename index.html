@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nishant Ekka - Cinematic Vice City Character Portfolio. Student, Aspiring Technologist, and Creative Learner.">
+  <meta name="author" content="Nishant Ekka">
+  <title>Nishant Ekka // Vice City Dossier</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       1. TOP HUD & VICE CITY NAVIGATION
+       ========================================================================= -->
+  <header class="vc-navbar">
+    <div class="vc-hud-left">
+      <a href="#hero" class="vc-logo">
+        Nishant <span class="vc-logo-badge">VC'86</span>
+      </a>
+
+      <!-- Vitals (Health & Armor) -->
+      <div class="vc-vitals" aria-label="Character Vitals">
+        <div class="vc-vital-row">
+          <span style="color: var(--hud-green)">HP</span>
+          <div class="vc-vital-bar">
+            <div class="vc-vital-fill vc-vital-health"></div>
+          </div>
+        </div>
+        <div class="vc-vital-row">
+          <span style="color: var(--hud-armor)">ARM</span>
+          <div class="vc-vital-bar">
+            <div class="vc-vital-fill vc-vital-armor"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Semantic CSS-only Navigation -->
+    <nav class="vc-nav">
+      <ul class="vc-nav-links">
+        <li><a href="#hero">Intro</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Arsenal</a></li>
+        <li><a href="#projects">Missions</a></li>
+        <li><a href="#timeline">Journey</a></li>
+        <li><a href="#interests">Passions</a></li>
+        <li><a href="#contact">Radio</a></li>
+      </ul>
+    </nav>
+
+    <!-- Wanted Level & Location Clock -->
+    <div class="vc-hud-right">
+      <div class="vc-wanted-stars" title="Passion Level: 5 Stars" aria-label="5 Star Passion Rating">
+        ★★★★★
+      </div>
+      <div class="vc-location-clock">
+        <div>VICE CITY // 305</div>
+        <div class="vc-clock">19:86 EST</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         2. OPENING CHARACTER INTRODUCTION (SUNSET HERO)
+         ========================================================================= -->
+    <section id="hero" class="hero-sunset">
+      <!-- Fallback and layered sunset art -->
+      <div class="hero-bg-fallback"></div>
+      <div class="hero-bg-layer"></div>
+      <div class="hero-vignette"></div>
+      <div class="hero-palms"></div>
+
+      <div class="hero-grid">
+        <!-- Hero Introduction Details (Left) -->
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span>The Personal Portfolio Of</span>
+          </div>
+
+          <h1 class="hero-title">NISHANT</h1>
+
+          <div class="hero-tagline">
+            "IT'S NOT JUST CODE. IT'S A LIFESTYLE."
+          </div>
+
+          <div class="hero-badges">
+            <span class="vc-pill highlight">Student</span>
+            <span class="vc-pill">Aspiring Technologist</span>
+            <span class="vc-pill">Creative Learner</span>
+          </div>
+
+          <p class="hero-bio-short">
+            Navigating the neon intersections of software engineering, cybersecurity, robotics, and cinematic media. Welcome to my personal command center.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="vc-btn vc-btn-primary">View Missions</a>
+            <a href="#studio" class="vc-btn vc-btn-secondary">Character Studio</a>
+          </div>
+        </div>
+
+        <!-- Hero Character Presentation (Right) -->
+        <div class="hero-right">
+          <div class="character-halo"></div>
+          <div class="character-pedestal"></div>
+
+          <div class="hero-character-wrapper">
+            <!-- Uses Nishant's stylized Vice City character asset with fallback -->
+            <picture>
+              <source srcset="assets/character/idle.webp" type="image/webp">
+              <source srcset="assets/character/idle.png" type="image/png">
+              <img src="assets/character/reference.jpg" alt="Nishant Ekka in Ivory Suit - Vice City Protagonist" class="hero-character-img">
+            </picture>
+          </div>
+
+          <div class="character-tag">
+            <div class="char-name">NISHANT EKKA</div>
+            <div class="char-spec">Level 1 // Technologist</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtle CSS Scroll Indicator -->
+      <div class="hero-scroll-indicator">
+        <div class="scroll-mouse">
+          <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll Down</span>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         3. CINEMATIC SCENE STUDIO (CSS-ONLY INTERACTIVE THEATER)
+         ========================================================================= -->
+    <section id="studio" class="section-studio">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Interactive Experience</span>
+          <h2 class="section-title">Character Cinema Studio</h2>
+          <p class="section-desc">
+            Explore talking sequences, highway cruising, walking transforms, and tactical stances powered strictly by HTML5 and CSS3 keyframes.
+          </p>
+        </div>
+
+        <!-- Technical Honesty Callout -->
+        <div class="tech-honesty-box">
+          <div class="honesty-icon">ℹ</div>
+          <div class="honesty-text">
+            <strong>Technical Honesty Architecture:</strong> CSS animates transforms, sprite sheets, layered mouth components, parallax backgrounds, and opacity. CSS cannot synthesize novel anatomical poses from a single photograph. This studio uses modular sprite-sheet components that support multi-frame sequences, falling back gracefully to translations and camera pans when single assets are present.
+          </div>
+        </div>
+
+        <!-- Hidden Pure CSS Radio Inputs for Scene Switching -->
+        <input type="radio" name="scene-view" id="scene-toggle-idle" class="scene-radio" checked>
+        <input type="radio" name="scene-view" id="scene-toggle-talk" class="scene-radio">
+        <input type="radio" name="scene-view" id="scene-toggle-cruise" class="scene-radio">
+        <input type="radio" name="scene-view" id="scene-toggle-walk" class="scene-radio">
+        <input type="radio" name="scene-view" id="scene-toggle-action" class="scene-radio">
+
+        <!-- Scene Switcher Navigation Tabs -->
+        <div class="scene-switcher">
+          <label for="scene-toggle-idle" class="scene-tab">1. Idle Sunset</label>
+          <label for="scene-toggle-talk" class="scene-tab">2. Dialogue Scene</label>
+          <label for="scene-toggle-cruise" class="scene-tab">3. Vehicle Highway</label>
+          <label for="scene-toggle-walk" class="scene-tab">4. Motion &amp; Sprites</label>
+          <label for="scene-toggle-action" class="scene-tab">5. Tactical Stance</label>
+        </div>
+
+        <!-- Studio Stage Frame -->
+        <div class="studio-stage">
+
+          <!-- SCENE 1: IDLE SUNSET STANCE -->
+          <article id="panel-idle" class="scene-panel">
+            <div class="idle-stage-content">
+              <div class="idle-info-card">
+                <span class="vc-pill highlight">Default Pose</span>
+                <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin: 0.5rem 0; font-style: italic; color: #fff;">
+                  Vice City Sunset Rest
+                </h3>
+                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.6;">
+                  Nishant stands poised in his signature ivory jacket draped over shoulders with black shirt and light trousers. Subtle CSS keyframe breathing transforms simulate lifelike idle presence.
+                </p>
+                <div style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan);">
+                  CSS Animation: characterIdleBreathe (4.5s ease-in-out infinite)
+                </div>
+              </div>
+
+              <div class="idle-character-slot">
+                <img src="assets/character/idle.webp" alt="Nishant Ekka Idle Stance" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 2: TALKING CHARACTER & SUBTITLES -->
+          <article id="panel-talk" class="scene-panel">
+            <!-- Character in talking stance -->
+            <div class="talk-character-container">
+              <img src="assets/character/idle.webp" alt="Nishant Ekka Talking" class="talk-character-img" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+              <!-- Animated mouth layer placeholder for multi-layer sprite assets -->
+              <div class="talk-mouth-layer" title="Layered mouth phoneme component"></div>
+            </div>
+
+            <!-- Dialogue Subtitle Panel -->
+            <div class="dialogue-box">
+              <div class="dialogue-speaker">
+                Nishant Ekka <span class="dialogue-badge">Subtitle HUD</span>
+              </div>
+
+              <div class="dialogue-line-container">
+                <div class="dialogue-line line-1">
+                  "Hey, I'm Nishant Ekka."
+                </div>
+                <div class="dialogue-line line-2">
+                  "Welcome to my world."
+                </div>
+                <div class="dialogue-line line-3">
+                  "I'm passionate about technology, creativity, and building things that matter."
+                </div>
+              </div>
+
+              <div class="dialogue-note">
+                ⚡ Sequenced via CSS @keyframes and staggered animation delays. (No fake audio claims).
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 3: VEHICLE HIGHWAY SCENE -->
+          <article id="panel-cruise" class="scene-panel">
+            <!-- Parallax layers -->
+            <div class="cruise-skyline"></div>
+            <div class="cruise-road">
+              <div class="road-markings"></div>
+            </div>
+            <div class="streetlights-layer"></div>
+
+            <!-- Sports Car Entity -->
+            <div class="cruise-vehicle-wrapper">
+              <div class="headlight-beam"></div>
+              <img src="assets/character/vehicle.webp" alt="Vice City Retro Sports Car" class="cruise-vehicle-img" onerror="this.onerror=null; this.src='assets/vehicles/sports-car.png';">
+              <div class="vehicle-underglow"></div>
+            </div>
+
+            <!-- Cruise Telemetry HUD -->
+            <div class="cruise-hud-panel">
+              <div>CRUISE SPEED</div>
+              <div class="speedometer">128 MPH</div>
+              <div style="color: var(--hud-green); font-size: 0.7rem; margin-top: 2px;">TURBO CHARGED</div>
+              <a href="#projects" class="cruise-cta">Cruise to Projects &darr;</a>
+            </div>
+          </article>
+
+          <!-- SCENE 4: WALKING / RUNNING MOTION & SPRITE ENGINE -->
+          <article id="panel-walk" class="scene-panel">
+            <div class="motion-parallax-bg"></div>
+            <div class="motion-sidewalk"></div>
+
+            <!-- Character Camera Gliding Across Screen -->
+            <div class="motion-character-box">
+              <!-- Configured sprite-sheet component: switches to spriteCycle if multi-frame sheet is supplied, 
+                   otherwise uses singleImagePace bobbing animation -->
+              <div class="sprite-player single-image-fallback" title="Single image translational pace fallback">
+                <img src="assets/character/idle.webp" alt="Character Moving" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+              </div>
+            </div>
+
+            <!-- Sprite Spec Documentation Card -->
+            <div class="motion-spec-card">
+              <div class="spec-title">CSS Sprite Engine Spec</div>
+              <p style="color: var(--text-dim); margin: 0.35rem 0 0.6rem; line-height: 1.4;">
+                Configured with <code>steps(var(--frame-count))</code>. When running/walking sprite sheets (e.g., <code>running.webp</code>) are supplied, frame sequencing activates. Currently displaying camera glide translation without faking natural limb strides.
+              </p>
+              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--sunset-gold);">
+                Asset Status: Single Pose Present &bull; Multi-frame gait awaited
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 5: FICTIONAL ACTION THEATER -->
+          <article id="panel-action" class="scene-panel">
+            <!-- Checkbox trigger for strike shake -->
+            <input type="checkbox" id="action-trigger" class="action-trigger-toggle">
+
+            <div class="action-arena" id="action-strike">
+              <!-- Muzzle flash effect -->
+              <div class="muzzle-flash-box">
+                <img src="assets/character/muzzle-flash.webp" alt="Muzzle Flash burst" onerror="this.onerror=null; this.src='assets/character/muzzle-flash.png';">
+              </div>
+
+              <!-- Fighter character stance -->
+              <div class="action-fighter-slot">
+                <img src="assets/character/idle.webp" alt="Tactical Stance" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+              </div>
+
+              <!-- Tactical Dossier & Controls -->
+              <div class="action-tactical-dossier">
+                <div class="tactical-header">Tactical Encounter Mode</div>
+                <p style="color: var(--text-dim); line-height: 1.5; margin-bottom: 0.8rem;">
+                  Fictional, non-graphic video-game stylized encounter. Tests synchronized CSS camera shake, transform impulses, and instant muzzle flash starburst bursts.
+                </p>
+
+                <div class="action-controls">
+                  <!-- Anchor target trigger for pure CSS shake -->
+                  <a href="#action-strike" class="action-fire-btn">Trigger Flash &amp; Shake</a>
+                  <a href="#studio" class="vc-btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Reset</a>
+                </div>
+
+                <div style="margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--sunset-gold);">
+                  Zero violence or graphic injury &bull; Pure stylistic effect testing
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         4. ABOUT NISHANT EKKA (CHARACTER DOSSIER)
+         ========================================================================= -->
+    <section id="about" class="section-about">
+      <div class="section-container">
+        <div class="about-grid">
+
+          <!-- Left: Real Photo Reference & Dossier Card -->
+          <div class="about-card-portrait">
+            <div class="portrait-frame">
+              <img src="assets/character/reference.jpg" alt="Nishant Ekka Reference Photo">
+              <div class="portrait-stamp">CONFIRMED IDENTITY</div>
+            </div>
+            <div class="about-dossier-meta">
+              <div><strong>NAME:</strong> Nishant Ekka</div>
+              <div><strong>AFFILIATION:</strong> Computer Science &bull; Tech Innovator</div>
+              <div><strong>SIGNATURE:</strong> Ivory Suit &bull; Dark Curly Hair</div>
+              <div><strong>BASE OF OPS:</strong> Portfolio Workspace</div>
+            </div>
+          </div>
+
+          <!-- Right: Bio & Background -->
+          <div class="about-content">
+            <span class="section-label">Character Dossier</span>
+            <h2 class="about-title">About <span>Nishant</span></h2>
+
+            <div class="about-lead">
+              Student, aspiring technologist, and creative learner building at the frontier of systems, code, and multimedia.
+            </div>
+
+            <div class="about-body">
+              <p>
+                My journey began with a deep foundation in ISC Class 12 Computer Science, where algorithmic logic and computational thinking sparked my fascination with building software that interacts with the real world.
+              </p>
+              <p>
+                Whether architecting voice-enabled financial solutions for underserved vendors, probing security vulnerabilities ethically, configuring robotics hardware, or directing cinematic video edits, I approach every challenge with strategic intent and relentless curiosity.
+              </p>
+              <p>
+                I believe modern technology should be powerful, accessible, and designed with genuine craftsmanship. It is not just about writing code—it is a creative lifestyle.
+              </p>
+            </div>
+
+            <!-- Stats Radar Grid -->
+            <div class="about-stats-grid">
+              <div class="stat-item">
+                <div class="stat-val">100%</div>
+                <div class="stat-lbl">Curiosity &amp; Drive</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-val">ISC CS</div>
+                <div class="stat-lbl">Core Foundation</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-val">MULTI</div>
+                <div class="stat-lbl">Disciplinary Skills</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         5. KNOWLEDGE & TECHNICAL SKILLS (ARSENAL)
+         ========================================================================= -->
+    <section id="skills" class="section-skills">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Technical Arsenal</span>
+          <h2 class="section-title">Weapons of Choice</h2>
+          <p class="section-desc">
+            A comprehensive breakdown of tools, programming languages, and practical domains in my development repertoire.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Skill Category 1: Programming Languages -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>⚔</span> Tier 1 // Languages</div>
+            <h3 class="skill-card-title">Core Programming</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">Python</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">C / C++</span>
+              <span class="skill-tag accent">HTML5 &amp; CSS3</span>
+              <span class="skill-tag">JavaScript Basics</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">Bash / Shell</span>
+            </div>
+          </article>
+
+          <!-- Skill Category 2: Cybersecurity & Ethical Hacking -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>🛡</span> Tier 1 // Defense &amp; Recon</div>
+            <h3 class="skill-card-title">Cybersecurity &amp; Ethics</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">Ethical Hacking</span>
+              <span class="skill-tag">Network Scanning</span>
+              <span class="skill-tag">Vulnerability Recon</span>
+              <span class="skill-tag accent">Linux OS Hardening</span>
+              <span class="skill-tag">Web Security Concepts</span>
+              <span class="skill-tag">Cryptography Basics</span>
+            </div>
+          </article>
+
+          <!-- Skill Category 3: Robotics & Hardware -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>🤖</span> Tier 2 // Hardware</div>
+            <h3 class="skill-card-title">Robotics &amp; IoT</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">Microcontroller Logic</span>
+              <span class="skill-tag">Sensor Interfacing</span>
+              <span class="skill-tag">Motor Controllers</span>
+              <span class="skill-tag">Circuit Prototyping</span>
+              <span class="skill-tag accent">Automation Workflows</span>
+            </div>
+          </article>
+
+          <!-- Skill Category 4: Web & APIs -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>🌐</span> Tier 2 // Systems</div>
+            <h3 class="skill-card-title">Web &amp; Cloud Systems</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">RESTful APIs</span>
+              <span class="skill-tag">Render Cloud Deploy</span>
+              <span class="skill-tag">Git &amp; GitHub</span>
+              <span class="skill-tag accent">Responsive Design</span>
+              <span class="skill-tag">Data Persistence</span>
+            </div>
+          </article>
+
+          <!-- Skill Category 5: Media & Creative Production -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>🎬</span> Tier 1 // Production</div>
+            <h3 class="skill-card-title">Cinematics &amp; Media</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">Video Editing</span>
+              <span class="skill-tag">Videography</span>
+              <span class="skill-tag">Photography</span>
+              <span class="skill-tag accent">Color Grading</span>
+              <span class="skill-tag">Visual Storytelling</span>
+              <span class="skill-tag">Soundtrack Pacing</span>
+            </div>
+          </article>
+
+          <!-- Skill Category 6: Strategic Thinking & Sports -->
+          <article class="skill-card">
+            <div class="skill-category-badge"><span>⚡</span> Tier 1 // Mindset</div>
+            <h3 class="skill-card-title">Strategy &amp; Teamwork</h3>
+            <div class="skill-tags">
+              <span class="skill-tag accent">Problem Solving</span>
+              <span class="skill-tag">Team Collaboration</span>
+              <span class="skill-tag">Agile Learning</span>
+              <span class="skill-tag accent">Competitive Drive</span>
+              <span class="skill-tag">Fast Prototyping</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         6. FEATURED PROJECTS (MISSIONS)
+         ========================================================================= -->
+    <section id="projects" class="section-projects">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Field Operations</span>
+          <h2 class="section-title">Completed &amp; Active Missions</h2>
+          <p class="section-desc">
+            Highlighted technical missions engineered with real-world utility and sound architecture.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- MISSION 1 (FEATURED): VoiceKhata -->
+          <article class="project-card featured">
+            <div class="project-info">
+              <div>
+                <div class="project-meta-row">
+                  <span class="mission-badge cyan">Featured Operation</span>
+                  <div class="project-status">Active Hackathon Build</div>
+                </div>
+
+                <h3 class="project-title">VoiceKhata</h3>
+                <div class="project-tagline">
+                  Voice-First Digital Ledger for Micro-Vendors &amp; Local Merchants
+                </div>
+
+                <p class="project-desc">
+                  A high-impact, voice-activated bookkeeping system designed to bridge digital literacy gaps for micro-vendors, roadside merchants, and small shop owners. By speaking transactions in natural speech, vendors record credit and debit entries without tedious manual data entry or complex accounting interfaces.
+                </p>
+
+                <!-- Backend Deployment Callout -->
+                <div class="backend-callout">
+                  <strong>Backend Live Deployment:</strong> Running on Render at <code>https://voicekhata-hackday.onrender.com</code>. Designed as an independent cloud API service powering transactional persistence.
+                </div>
+
+                <div class="project-tech-stack">
+                  <span class="tech-badge">Python Backend</span>
+                  <span class="tech-badge">Speech Processing</span>
+                  <span class="tech-badge">Render Deployment</span>
+                  <span class="tech-badge">REST API</span>
+                  <span class="tech-badge">Financial Ledger</span>
+                </div>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/nishantekka2007-sys/voicekhata-hackday" target="_blank" rel="noopener noreferrer" class="vc-btn vc-btn-primary">
+                  GitHub Repository &rarr;
+                </a>
+                <a href="https://voicekhata-hackday.onrender.com" target="_blank" rel="noopener noreferrer" class="vc-btn vc-btn-secondary">
+                  Backend Service URL &rarr;
+                </a>
+              </div>
+            </div>
+
+            <!-- Visual Schematic Blueprint -->
+            <div class="project-visual">
+              <div class="project-schematic">
+                <div class="schematic-icon">🎙</div>
+                <div class="schematic-title">VOICEKHATA DOSSIER</div>
+                <p class="schematic-caption">
+                  Spoken Input &rarr; Audio Parsing &rarr; Cloud Ledger Engine &rarr; Instant Vendor Balance
+                </p>
+                <div style="margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-cyan);">
+                  REPOSITORY: nishantekka2007-sys/voicekhata-hackday
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MISSION 2: Cyber Recon & Network Scanner Concept -->
+          <article class="project-card">
+            <div class="project-info">
+              <div>
+                <div class="project-meta-row">
+                  <span class="mission-badge">Security Dossier</span>
+                  <div class="project-status">In Active Research</div>
+                </div>
+
+                <h3 class="project-title">Cyber Recon &amp; Vulnerability Lab</h3>
+                <div class="project-tagline">
+                  Ethical Security Audit &amp; Network Topology Analysis Tool
+                </div>
+
+                <p class="project-desc">
+                  An exploratory ethical hacking sandbox focused on port scanning routines, open-port telemetry, security header evaluation, and basic penetration testing workflows to understand defensive perimeter hardening.
+                </p>
+
+                <div class="project-tech-stack">
+                  <span class="tech-badge">Python</span>
+                  <span class="tech-badge">Network Sockets</span>
+                  <span class="tech-badge">Linux Hardening</span>
+                  <span class="tech-badge">Ethical Auditing</span>
+                </div>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/nishantekka2007-sys" target="_blank" rel="noopener noreferrer" class="vc-btn vc-btn-secondary">
+                  View On GitHub &rarr;
+                </a>
+              </div>
+            </div>
+
+            <div class="project-visual">
+              <div class="project-schematic">
+                <div class="schematic-icon">🛡</div>
+                <div class="schematic-title">CYBER RECON SUITE</div>
+                <p class="schematic-caption">
+                  Perimeter Discovery &bull; Packet Inspection &bull; Port Auditing
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- MISSION 3: Vice City Cinematic Portfolio Engine -->
+          <article class="project-card">
+            <div class="project-info">
+              <div>
+                <div class="project-meta-row">
+                  <span class="mission-badge">Frontend Architecture</span>
+                  <div class="project-status">Deployed &amp; Live</div>
+                </div>
+
+                <h3 class="project-title">Vice City CSS Character Engine</h3>
+                <div class="project-tagline">
+                  Pure HTML5/CSS3 Interactive Game Atmosphere Without JavaScript
+                </div>
+
+                <p class="project-desc">
+                  A zero-JavaScript portfolio showcasing stateful transitions using CSS custom properties, keyframe timing functions, parallax depth rendering, responsive layouts, and documented sprite components with complete technical honesty.
+                </p>
+
+                <div class="project-tech-stack">
+                  <span class="tech-badge">Pure HTML5</span>
+                  <span class="tech-badge">CSS3 Keyframes</span>
+                  <span class="tech-badge">Sprite Steps()</span>
+                  <span class="tech-badge">Zero JS</span>
+                </div>
+              </div>
+
+              <div class="project-links">
+                <a href="#hero" class="vc-btn vc-btn-secondary">
+                  Experience Above &uarr;
+                </a>
+              </div>
+            </div>
+
+            <div class="project-visual">
+              <div class="project-schematic">
+                <div class="schematic-icon">🌴</div>
+                <div class="schematic-title">CSS ENGINE '86</div>
+                <p class="schematic-caption">
+                  Modular Sprite Component &bull; Parallax Skyline &bull; 100% No Script
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         7. EDUCATION & JOURNEY (TIMELINE)
+         ========================================================================= -->
+    <section id="timeline" class="section-education">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Career Progression</span>
+          <h2 class="section-title">Education &amp; Journey</h2>
+          <p class="section-desc">
+            Academic milestones and the foundation of computational and technical skills.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <!-- Item 1: ISC Class 12 -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-date">Completed Foundation</div>
+              <h3 class="timeline-title">ISC Class 12 (Computer Science)</h3>
+              <div class="timeline-subtitle">Rigorous Pre-University Computing &amp; Mathematics</div>
+              <p class="timeline-desc">
+                Studied core data structures, algorithms, object-oriented programming principles, Boolean algebra, recursion, and computational problem-solving. This built the solid engineering bedrock for future systems development.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2: Current Undergraduate Pursuit (Editable) -->
+          <div class="timeline-item active">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card active">
+              <div class="timeline-date" style="color: var(--hud-green);">Currently Active &bull; Editable</div>
+              <h3 class="timeline-title">Undergraduate Degree &amp; College</h3>
+              <div class="timeline-subtitle">[Current Degree / Specialization] &bull; [Current College / University]</div>
+              <p class="timeline-desc">
+                Expanding competencies in systems architecture, advanced programming, robotics experimentation, and cybersecurity concepts. <em>(Update with your exact enrolled university and degree details).</em>
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3: Hackathons & Open Source Exploration -->
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-date">Continuous Evolution</div>
+              <h3 class="timeline-title">Hackathons, Hardware &amp; Open Source</h3>
+              <div class="timeline-subtitle">Hands-On Prototyping</div>
+              <p class="timeline-desc">
+                Competing in hackathons (like VoiceKhata Hackday), building micro-controller IoT projects, and publishing modular code for community utility.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         8. ACHIEVEMENTS & CERTIFICATIONS
+         ========================================================================= -->
+    <section id="achievements" class="section-achievements">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Recognitions &amp; Credentials</span>
+          <h2 class="section-title">Achievements &amp; Badges</h2>
+          <p class="section-desc">
+            Verified milestones and competitive pursuits. (Easily customized as new accolades are unlocked).
+          </p>
+        </div>
+
+        <div class="achievements-grid">
+          <article class="achievement-card">
+            <div class="achievement-icon">🏆</div>
+            <div class="achievement-info">
+              <h4>VoiceKhata Hackday Project</h4>
+              <div class="achievement-org">Hackathon Innovation</div>
+              <p class="achievement-desc">
+                Conceived, designed, and deployed a working voice-enabled financial ledger prototype with Render cloud hosting for micro-vendors.
+              </p>
+            </div>
+          </article>
+
+          <article class="achievement-card">
+            <div class="achievement-icon">🎓</div>
+            <div class="achievement-info">
+              <h4>ISC Computer Science Distinction</h4>
+              <div class="achievement-org">Academic Excellence</div>
+              <p class="achievement-desc">
+                Successfully mastered algorithmic design, computational problem solving, and object-oriented paradigms in the ISC curriculum.
+              </p>
+            </div>
+          </article>
+
+          <article class="achievement-card">
+            <div class="achievement-icon">⚡</div>
+            <div class="achievement-info">
+              <h4>Cybersecurity &amp; Hardware Labs</h4>
+              <div class="achievement-org">Self-Directed Research</div>
+              <p class="achievement-desc">
+                Continuous independent exploration of ethical security concepts, Linux penetration testing environments, and robotics builds.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         9. INTERESTS & PASSIONS
+         ========================================================================= -->
+    <section id="interests" class="section-interests">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-label">Beyond The Terminal</span>
+          <h2 class="section-title">Interests &amp; Passions</h2>
+          <p class="section-desc">
+            The diverse pursuits that fuel my creativity, discipline, and strategic thinking.
+          </p>
+        </div>
+
+        <div class="interests-grid">
+          <div class="interest-card">
+            <span class="interest-emoji">💻</span>
+            <h3 class="interest-name">Programming</h3>
+            <p class="interest-desc">Crafting elegant algorithms, robust backends, and creative interfaces.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🛡</span>
+            <h3 class="interest-name">Cybersecurity</h3>
+            <p class="interest-desc">Investigating defense architectures, protocol analysis, and threat surfaces.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🔓</span>
+            <h3 class="interest-name">Ethical Hacking</h3>
+            <p class="interest-desc">White-hat vulnerability discovery and proactive system hardening.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🤖</span>
+            <h3 class="interest-name">Robotics</h3>
+            <p class="interest-desc">Bridging physical microcontrollers with automated software control.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">📸</span>
+            <h3 class="interest-name">Photography</h3>
+            <p class="interest-desc">Capturing evocative sunset lighting, architectural lines, and street candids.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🎥</span>
+            <h3 class="interest-name">Videography</h3>
+            <p class="interest-desc">Directing cinematic angles, camera motion, and visual atmospheres.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🎞</span>
+            <h3 class="interest-name">Video Editing</h3>
+            <p class="interest-desc">Rhythm-based pacing, color grading, sound design, and narrative flow.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">⚽</span>
+            <h3 class="interest-name">Football</h3>
+            <p class="interest-desc">On-pitch agility, spatial awareness, and competitive teamwork.</p>
+          </div>
+
+          <div class="interest-card">
+            <span class="interest-emoji">🏀</span>
+            <h3 class="interest-name">Basketball</h3>
+            <p class="interest-desc">High-tempo decision making, fast-break offense, and defensive grit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         10. CONTACT & TRANSMISSION CHANNEL
+         ========================================================================= -->
+    <section id="contact" class="section-contact">
+      <div class="section-container">
+        <div class="contact-card">
+          <span class="section-label">Secure Transceiver</span>
+          <h2 class="section-title">Open Transmission</h2>
+          <p class="section-desc" style="margin: 0.8rem auto 0;">
+            Want to collaborate on software, explore a cybersecurity concept, or discuss creative projects? Reach out via the channels below.
+          </p>
+
+          <div class="contact-channel-list">
+            <!-- GitHub (Confirmed Live) -->
+            <a href="https://github.com/nishantekka2007-sys" target="_blank" rel="noopener noreferrer" class="channel-box active-link">
+              <div class="channel-icon">🐙</div>
+              <div class="channel-label">GitHub</div>
+              <div class="channel-val">@nishantekka2007-sys</div>
+              <span class="channel-status ready">Online &bull; Active</span>
+            </a>
+
+            <!-- Email (Unpopulated as requested until supplied) -->
+            <div class="channel-box">
+              <div class="channel-icon">✉</div>
+              <div class="channel-label">Direct Email</div>
+              <div class="channel-val">[Email Pending User Supply]</div>
+              <span class="channel-status pending">Slot Reserved</span>
+            </div>
+
+            <!-- LinkedIn (Unpopulated as requested until supplied) -->
+            <div class="channel-box">
+              <div class="channel-icon">💼</div>
+              <div class="channel-label">LinkedIn</div>
+              <div class="channel-val">[LinkedIn Pending User Supply]</div>
+              <span class="channel-status pending">Slot Reserved</span>
+            </div>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);">
+            Encrypted Frequency: VICE-CITY-FM // Ready for incoming transmissions
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       11. FOOTER & ASSET MANIFEST
+       ========================================================================= -->
+  <footer class="vc-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="vc-logo" style="margin-bottom: 0.75rem;">
+          Nishant Ekka <span class="vc-logo-badge">PROTAGONIST</span>
+        </div>
+        <p style="margin-bottom: 1rem; line-height: 1.6;">
+          An original GTA VI / Vice City-inspired portfolio built with semantic HTML5 and CSS3 keyframes. Zero external JavaScript, zero tracking, pure technical honesty.
+        </p>
+        <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--sunset-gold);">
+          &bull; "It's not just code. It's a lifestyle."
+        </p>
+      </div>
+
+      <!-- Live Asset Verification Manifest -->
+      <div class="footer-manifest">
+        <h5>Character Asset Manifest</h5>
+        <ul>
+          <li><span class="asset-ok">&check; assets/backgrounds/vice-city-sunset.webp</span> (Rendered Background)</li>
+          <li><span class="asset-ok">&check; assets/character/idle.webp</span> (Stylized Full Body Render)</li>
+          <li><span class="asset-ok">&check; assets/character/vehicle.webp</span> (Retro Sports Car Cutout)</li>
+          <li><span class="asset-ok">&check; assets/character/muzzle-flash.webp</span> (Tactical Starburst Asset)</li>
+          <li><span class="asset-ok">&check; assets/character/reference.jpg</span> (Real User Reference Photo)</li>
+          <li><span class="asset-wait">&cir; assets/character/talking.webp</span> (Multi-mouth sprite sheet - fallback active)</li>
+          <li><span class="asset-wait">&cir; assets/character/running.webp</span> (Multi-frame run cycle - translation active)</li>
+          <li><span class="asset-wait">&cir; assets/character/fighting.webp</span> (Multi-pose combat sheet - tactical HUD active)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; Nishant Ekka. Handcrafted with semantic HTML5 &amp; CSS3. No JavaScript used.
+    </div>
+  </footer>
+
+</body>
+</html>
+
