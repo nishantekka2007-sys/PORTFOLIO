@@ -262,9 +262,9 @@
             </div>
           </article>
 
-          <!-- SCENE 2: TALKING CHARACTER & BRANCHING DIALOGUE ENGINE -->
-          <article id="panel-talk" class="scene-panel dialogue-scene-panel">
-            <!-- Background: Tropical Penthouse Lounge at Dusk -->
+<!-- SCENE 2: NISHANT AI // INTERACTIVE PORTFOLIO CHATBOT TERMINAL -->
+          <article id="panel-talk" class="scene-panel dialogue-scene-panel" aria-label="Nishant AI Assistant Chatbot Terminal">
+            <!-- Background: Vice City Penthouse Lounge Cyber-Grid -->
             <div class="dialogue-bg-stage">
               <div class="dialogue-bg-sky"></div>
               <div class="dialogue-bg-skyline"></div>
@@ -272,74 +272,141 @@
               <div class="dialogue-ambient-light"></div>
             </div>
 
-            <div class="dialogue-layout-grid">
-              <!-- Left Column: Compact Branching Dialogue Terminal -->
-              <div class="dialogue-terminal-panel">
-                <div class="dialogue-header-bar">
-                  <div class="dialogue-speaker-tag">
-                    <span class="speaker-icon">🎙️</span>
-                    <span class="speaker-name">NISHANT EKKA</span>
-                    <span class="speaker-status-pill" id="dialogue-status-pill">TRANSMITTING</span>
+            <div class="chat-terminal-layout">
+              <!-- Left Column: Holographic AI Assistant Identity & Telemetry Card -->
+              <aside class="chat-identity-card" aria-label="Nishant AI Assistant Identity">
+                <div class="chat-avatar-wrapper">
+                  <div class="chat-avatar-frame">
+                    <img src="assets/character/idle.webp" alt="Nishant Ekka - Virtual Assistant" class="chat-avatar-img" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+                    <div class="chat-avatar-glow"></div>
+                    <span class="chat-online-badge" title="Assistant Ready &amp; Online"></span>
                   </div>
-                  <div class="dialogue-progress" id="dialogue-progress">1 / 3</div>
-                </div>
-
-                <!-- Text Display Box with Typewriter Effect -->
-                <div class="dialogue-text-viewport" id="dialogue-text-viewport" role="region" aria-live="polite">
-                  <p class="dialogue-text-content" id="dialogue-text-content">
-                    "Hey, I'm Nishant Ekka. Welcome to my world."
-                  </p>
-                  <span class="dialogue-cursor" id="dialogue-cursor">▋</span>
-                </div>
-
-                <!-- Branching Choice Buttons Cluster -->
-                <div class="dialogue-choices-cluster" id="dialogue-choices-cluster" style="display: none;">
-                  <div class="choices-prompt-label">SELECT A TOPIC TO EXPLORE:</div>
-                  <div class="choices-btn-group">
-                    <button type="button" class="dialogue-choice-btn" data-topic="software">
-                      <span class="choice-num">[1]</span>
-                      <span class="choice-text">💻 Full-Stack Architecture &amp; Systems</span>
-                    </button>
-                    <button type="button" class="dialogue-choice-btn" data-topic="robotics">
-                      <span class="choice-num">[2]</span>
-                      <span class="choice-text">🤖 Robotics, IoT &amp; Embedded Hardware</span>
-                    </button>
-                    <button type="button" class="dialogue-choice-btn" data-topic="creative">
-                      <span class="choice-num">[3]</span>
-                      <span class="choice-text">🎨 Creative 3D WebGL &amp; User Experience</span>
-                    </button>
+                  <div class="chat-identity-header">
+                    <div class="chat-identity-badge">DIGITAL TWIN</div>
+                    <h3 class="chat-identity-name">NISHANT AI</h3>
+                    <div class="chat-identity-role">Virtual Portfolio Guide</div>
                   </div>
                 </div>
 
-                <!-- Dialogue Navigation Controls Bar -->
-                <div class="dialogue-action-bar">
-                  <button type="button" class="dialogue-btn dialogue-btn-continue" id="dialogue-btn-continue" title="Advance to next line (or click while typing to skip)">
-                    <span class="btn-text" id="dialogue-btn-label">Continue ▶</span>
-                  </button>
-                  <button type="button" class="dialogue-btn dialogue-btn-topics" id="dialogue-btn-topics" title="View Portfolio Discussion Topics">
-                    Portfolio Topics 💬
-                  </button>
-                  <button type="button" class="dialogue-btn dialogue-btn-restart" id="dialogue-btn-restart" title="Restart conversation from the beginning">
-                    ↺ Restart
-                  </button>
+                <!-- Live System Telemetry -->
+                <div class="chat-telemetry-box">
+                  <div class="telemetry-row">
+                    <span class="tel-label">CORE STATUS:</span>
+                    <span class="tel-val status-online">● READY // LOCAL</span>
+                  </div>
+                  <div class="telemetry-row">
+                    <span class="tel-label">KNOWLEDGE BASE:</span>
+                    <span class="tel-val">PORTFOLIO v2.4</span>
+                  </div>
+                  <div class="telemetry-row">
+                    <span class="tel-label">RESPONSE LATENCY:</span>
+                    <span class="tel-val">&lt; 1 MS (OFFLINE)</span>
+                  </div>
+                  <div class="telemetry-row">
+                    <span class="tel-label">LOCATION:</span>
+                    <span class="tel-val">VICE CITY TERMINAL</span>
+                  </div>
                 </div>
 
-                <div class="dialogue-hint-footer">
-                  <span>💡 Tip: Click the text box or press Space/Enter to advance or skip typing.</span>
+                <!-- Scrollable Frequently Asked Questions Panel -->
+                <div class="chat-faq-container">
+                  <div class="faq-panel-title">FREQUENTLY ASKED QUESTIONS</div>
+                  <div class="chat-faq-list" role="list">
+                    <button type="button" class="faq-query-btn" data-query="Who is Nishant?">
+                      <span class="faq-btn-icon">👤</span>
+                      <span class="faq-btn-text">Who is Nishant?</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="Tell me about VoiceKhata.">
+                      <span class="faq-btn-icon">🎙️</span>
+                      <span class="faq-btn-text">What is VoiceKhata?</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="What projects has he built?">
+                      <span class="faq-btn-icon">🚀</span>
+                      <span class="faq-btn-text">What projects has he built?</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="What technologies does he use?">
+                      <span class="faq-btn-icon">⚔️</span>
+                      <span class="faq-btn-text">Technical Arsenal &amp; Stack</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="Tell me about Cyber Recon Lab.">
+                      <span class="faq-btn-icon">🛡️</span>
+                      <span class="faq-btn-text">Cyber Recon Lab</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="What can I explore on this website?">
+                      <span class="faq-btn-icon">🕹️</span>
+                      <span class="faq-btn-text">Games &amp; Interactive Demos</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="What are his interests?">
+                      <span class="faq-btn-icon">🌟</span>
+                      <span class="faq-btn-text">Passions &amp; Interests</span>
+                    </button>
+                    <button type="button" class="faq-query-btn" data-query="How can I contact or hire Nishant?">
+                      <span class="faq-btn-icon">📬</span>
+                      <span class="faq-btn-text">Contact &amp; Hire Nishant</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </aside>
 
-              <!-- Right Column: Character Portrait Frame (Never overlapped!) -->
-              <div class="dialogue-character-column">
-                <div class="dialogue-character-frame">
-                  <img src="assets/character/idle.webp" alt="Nishant Ekka Speaking" class="dialogue-character-img" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
-                  <div class="dialogue-photo-rim-glow"></div>
+              <!-- Right Column: Interactive Chat Interface -->
+              <section class="chat-main-terminal" aria-label="Interactive Chat Window">
+                <!-- Chat Window Header Bar -->
+                <div class="chat-terminal-header">
+                  <div class="chat-header-info">
+                    <div class="chat-ai-icon" aria-hidden="true">
+                      <span class="ai-core-pulse"></span>
+                      🤖
+                    </div>
+                    <div>
+                      <div class="chat-title-group">
+                        <h2 class="chat-title">NISHANT AI</h2>
+                        <span class="chat-ready-pill" id="chat-ready-pill">ONLINE</span>
+                      </div>
+                      <p class="chat-subtitle">Virtual Portfolio Assistant &bull; Ask me anything about Nishant</p>
+                    </div>
+                  </div>
+
+                  <div class="chat-header-actions">
+                    <button type="button" class="chat-action-btn chat-btn-reset" id="chat-btn-reset" title="Clear conversation and start fresh">
+                      <span class="btn-icon">↺</span>
+                      <span class="btn-text">New Chat</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+
+                <!-- Chat Messages Scrollable History -->
+                <div class="chat-history-viewport" id="chat-history-viewport" role="log" aria-live="polite" aria-label="Chat conversation history">
+                  <!-- Messages dynamically injected here -->
+                </div>
+
+                <!-- Suggested Quick Prompts Bar (visible below messages) -->
+                <div class="chat-suggestions-bar" id="chat-suggestions-bar">
+                  <div class="suggestions-label">SUGGESTED QUESTIONS:</div>
+                  <div class="suggestions-scroll" id="suggestions-scroll">
+                    <button type="button" class="suggestion-chip" data-query="Who is Nishant?">Who is Nishant?</button>
+                    <button type="button" class="suggestion-chip" data-query="What projects has he built?">What projects has he built?</button>
+                    <button type="button" class="suggestion-chip" data-query="What technologies does he use?">What technologies does he use?</button>
+                    <button type="button" class="suggestion-chip" data-query="Tell me about VoiceKhata.">Tell me about VoiceKhata.</button>
+                    <button type="button" class="suggestion-chip" data-query="What are his interests?">What are his interests?</button>
+                    <button type="button" class="suggestion-chip" data-query="What can I explore on this website?">What can I explore on this website?</button>
+                  </div>
+                </div>
+
+                <!-- Chat Composer Form -->
+                <form class="chat-composer-bar" id="chat-composer-form" autocomplete="off">
+                  <div class="chat-input-wrapper">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Ask me anything about Nishant..." maxlength="500" aria-label="Message Nishant AI">
+                  </div>
+                  <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
+                    <span class="send-btn-text">SEND</span>
+                    <span class="send-btn-icon">➤</span>
+                  </button>
+                </form>
+              </section>
             </div>
           </article>
 
-          <!-- SCENE 3: TROPICAL COASTAL ARCADE CAR-DRIVING MINI-GAME -->
+                    <!-- SCENE 3: TROPICAL COASTAL ARCADE CAR-DRIVING MINI-GAME -->
           <article id="panel-cruise" class="scene-panel arcade-game-panel">
             <!-- Three.js Real-time 3D Game Canvas Viewport -->
             <div id="three-game-viewport" class="three-game-viewport"></div>

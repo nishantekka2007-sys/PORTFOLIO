@@ -286,246 +286,497 @@
   }
 
   // ==========================================================================
-  // SCENE 2: BRANCHING TYPEWRITER DIALOGUE ENGINE
+  // SCENE 2: NISHANT AI // INTERACTIVE PORTFOLIO CHATBOT ENGINE
   // ==========================================================================
-  class DialogueEngine {
+  class DialogueChatbotEngine {
     constructor() {
-      this.viewport = document.getElementById('dialogue-text-viewport');
-      this.textContent = document.getElementById('dialogue-text-content');
-      this.cursor = document.getElementById('dialogue-cursor');
-      this.btnContinue = document.getElementById('dialogue-btn-continue');
-      this.btnLabel = document.getElementById('dialogue-btn-label');
-      this.btnTopics = document.getElementById('dialogue-btn-topics');
-      this.btnRestart = document.getElementById('dialogue-btn-restart');
-      this.choicesCluster = document.getElementById('dialogue-choices-cluster');
-      this.statusPill = document.getElementById('dialogue-status-pill');
-      this.progressIndicator = document.getElementById('dialogue-progress');
+      // DOM Elements
+      this.historyViewport = document.getElementById('chat-history-viewport');
+      this.composerForm = document.getElementById('chat-composer-form');
+      this.inputField = document.getElementById('chat-input');
+      this.sendBtn = document.getElementById('chat-send-btn');
+      this.btnReset = document.getElementById('chat-btn-reset');
+      this.readyPill = document.getElementById('chat-ready-pill');
 
-      this.introLines = [
-        "Hey, I'm Nishant Ekka. Welcome to my world.",
-        "I'm a technologist and creative builder focused on high-performance software, robotics, and interactive experiences.",
-        "It's not just code—it's about building systems with impact, precision, and style. Select a topic below to explore deeper."
-      ];
+      // State
+      this.messages = [];
+      this.isGenerating = false;
+      this.welcomeSent = false;
 
-      this.topicBranches = {
-        software: [
-          "In full-stack engineering, I architect scalable web applications using TypeScript, React, Node.js, and Python.",
-          "I prioritize clean modular patterns, responsive UI architectures, and resilient REST/GraphQL APIs that stay fast at scale."
-        ],
-        robotics: [
-          "In hardware and IoT, I engineered SafePulse—an intelligent biomedical health tracker with real-time vitals telemetry.",
-          "I also designed AquaSense, uniting ESP32 microcontrollers, water sensor arrays, and cloud monitoring."
-        ],
-        creative: [
-          "Creatively, I craft real-time 3D web engines like this Vice City simulation, utilizing Three.js and custom GLSL shader physics.",
-          "I believe the best technology should feel alive, cinematic, and genuinely exciting to interact with."
-        ]
-      };
-
-      this.currentMode = 'intro';
-      this.currentTopic = null;
-      this.lineIndex = 0;
-      this.activeLines = this.introLines;
-
-      this.isTyping = false;
-      this.typewriterTimer = null;
-      this.currentFullText = '';
-      this.charIndex = 0;
+      // Knowledge Base Data
+      this.knowledge = this.buildKnowledgeBase();
 
       this.init();
     }
 
     init() {
-      this.setupListeners();
-      this.startLine(0);
+      this.setupEventListeners();
+      this.sendWelcomeMessage();
     }
 
-    setupListeners() {
-      if (this.btnContinue) {
-        this.btnContinue.addEventListener('click', () => {
-          this.handleAdvance();
+    setupEventListeners() {
+      // Form submission
+      if (this.composerForm) {
+        this.composerForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          this.handleUserSubmit();
         });
       }
 
-      if (this.viewport) {
-        this.viewport.addEventListener('click', () => {
-          this.handleAdvance();
+      // Reset / New Chat Button
+      if (this.btnReset) {
+        this.btnReset.addEventListener('click', () => {
+          this.resetConversation();
         });
       }
 
-      if (this.choicesCluster) {
-        this.choicesCluster.addEventListener('click', (e) => {
-          const btn = e.target.closest('.dialogue-choice-btn');
-          if (!btn) return;
-          const topic = btn.dataset.topic;
-          if (topic && this.topicBranches[topic]) {
-            this.startTopic(topic);
+      // Event delegation for clicks on chips, quick tags, FAQ buttons, and in-chat action buttons
+      document.addEventListener('click', (e) => {
+        const chip = e.target.closest('.suggestion-chip, .quick-tag-btn, .faq-query-btn');
+        if (chip) {
+          const query = chip.dataset.query;
+          if (query && !this.isGenerating) {
+            this.submitDirectQuery(query);
           }
-        });
-      }
+          return;
+        }
 
-      if (this.btnTopics) {
-        this.btnTopics.addEventListener('click', () => {
-          this.toggleChoicesCluster();
-        });
-      }
+        const actionBtn = e.target.closest('.chat-link-btn');
+        if (actionBtn) {
+          const switchTab = actionBtn.dataset.switchTab;
+          if (switchTab) {
+            e.preventDefault();
+            const tabRadio = document.getElementById(`scene-toggle-${switchTab}`);
+            if (tabRadio) {
+              tabRadio.checked = true;
+              tabRadio.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            return;
+          }
 
-      if (this.btnRestart) {
-        this.btnRestart.addEventListener('click', () => {
-          this.restart();
-        });
-      }
-
-      window.addEventListener('keydown', (e) => {
-        const talkRadio = document.getElementById('scene-toggle-talk');
-        if (talkRadio && talkRadio.checked) {
-          if (e.key === ' ' || e.key === 'Enter') {
-            if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-              e.preventDefault();
-              this.handleAdvance();
+          const scrollToId = actionBtn.dataset.scrollTo;
+          if (scrollToId) {
+            e.preventDefault();
+            const targetEl = document.getElementById(scrollToId);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           }
         }
       });
     }
 
-    handleAdvance() {
-      if (this.isTyping) {
-        this.completeTypingImmediately();
-      } else {
-        if (this.lineIndex + 1 < this.activeLines.length) {
-          this.startLine(this.lineIndex + 1);
-        } else {
-          this.showChoicesCluster();
-        }
+    onTabActivated() {
+      // When user clicks the Scene 2 tab, focus input and ensure scrolled to bottom
+      setTimeout(() => {
+        if (this.inputField) this.inputField.focus();
+        this.scrollToBottom();
+      }, 100);
+    }
+
+    sendWelcomeMessage() {
+      if (this.welcomeSent) return;
+      this.welcomeSent = true;
+
+      const welcomeHtml = `Hey! Welcome to Nishant's digital world. I'm <strong>Nishant AI</strong>, your interactive guide to this portfolio. Ask me anything about Nishant, his documented missions, technical arsenal, or the interactive games hidden across this site!`;
+      
+      const welcomeActions = [
+        { label: '👤 Who is Nishant?', query: 'Who is Nishant?' },
+        { label: '🚀 Highlighted Missions', query: 'What projects has he built?' },
+        { label: '🎙️ VoiceKhata Dossier', query: 'Tell me about VoiceKhata.' },
+        { label: '⚔️ Technical Arsenal', query: 'What technologies does he use?' }
+      ];
+
+      this.appendMessage('bot', welcomeHtml, welcomeActions);
+    }
+
+    resetConversation() {
+      if (this.isGenerating) return;
+      if (this.historyViewport) {
+        this.historyViewport.innerHTML = '';
+      }
+      this.messages = [];
+      this.welcomeSent = false;
+      this.sendWelcomeMessage();
+      if (this.inputField) {
+        this.inputField.value = '';
+        this.inputField.focus();
       }
     }
 
-    startLine(idx) {
-      this.lineIndex = idx;
-      this.currentFullText = this.activeLines[this.lineIndex] || '';
-      this.charIndex = 0;
-      this.isTyping = true;
+    handleUserSubmit() {
+      if (this.isGenerating || !this.inputField) return;
+      const text = this.inputField.value.trim();
+      if (!text) return;
 
-      if (this.textContent) {
-        this.textContent.textContent = '';
-      }
-      if (this.btnLabel) {
-        this.btnLabel.textContent = 'Skip ⏭';
-      }
-      if (this.statusPill) {
-        this.statusPill.textContent = 'TRANSMITTING';
-        this.statusPill.style.background = 'var(--neon-pink)';
-      }
+      this.inputField.value = '';
+      this.submitDirectQuery(text);
+    }
 
-      this.updateProgress();
+    submitDirectQuery(text) {
+      if (this.isGenerating) return;
 
-      if (this.typewriterTimer) {
-        clearInterval(this.typewriterTimer);
-        this.typewriterTimer = null;
+      // 1. Render User Message Safely
+      this.appendMessage('user', text);
+
+      // 2. Lock Composer
+      this.setGeneratingState(true);
+
+      // 3. Show Typing Indicator
+      const typingEl = this.showTypingIndicator();
+
+      // 4. Simulate natural response latency (450ms - 650ms)
+      const latency = 450 + Math.random() * 200;
+      setTimeout(async () => {
+        // Remove typing indicator
+        if (typingEl && typingEl.parentNode) {
+          typingEl.parentNode.removeChild(typingEl);
+        }
+
+        // Generate response
+        const response = await this.generateResponse(text);
+
+        // Append Bot Response
+        this.appendMessage('bot', response.html, response.actions);
+
+        // Unlock Composer
+        this.setGeneratingState(false);
+        if (this.inputField) this.inputField.focus();
+      }, latency);
+    }
+
+    setGeneratingState(isGenerating) {
+      this.isGenerating = isGenerating;
+      if (this.sendBtn) this.sendBtn.disabled = isGenerating;
+      if (this.inputField) this.inputField.disabled = isGenerating;
+      if (this.readyPill) {
+        this.readyPill.textContent = isGenerating ? 'THINKING' : 'ONLINE';
+        this.readyPill.style.color = isGenerating ? '#ffaa00' : '#00ffaa';
+        this.readyPill.style.borderColor = isGenerating ? '#ffaa00' : '#00ffaa';
       }
+    }
 
-      if (CONFIG.prefersReducedMotion) {
-        this.completeTypingImmediately();
-        return;
+    appendMessage(role, content, actions = []) {
+      if (!this.historyViewport) return;
+
+      const row = document.createElement('div');
+      row.className = `chat-msg-row ${role}`;
+
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-msg-bubble';
+
+      // Meta header (Author & Time)
+      const meta = document.createElement('div');
+      meta.className = 'chat-msg-meta';
+
+      const author = document.createElement('span');
+      author.className = 'chat-msg-author';
+      author.textContent = role === 'bot' ? '🤖 NISHANT AI' : '👤 YOU';
+
+      const time = document.createElement('span');
+      time.className = 'chat-msg-time';
+      const now = new Date();
+      time.textContent = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+      meta.appendChild(author);
+      meta.appendChild(time);
+      bubble.appendChild(meta);
+
+      // Message Body
+      const body = document.createElement('div');
+      body.className = 'chat-msg-text';
+
+      if (role === 'user') {
+        // Safe text node prevents any raw HTML / script execution
+        const p = document.createElement('p');
+        p.textContent = content;
+        body.appendChild(p);
+      } else {
+        // Assistant responses use structured safe HTML
+        body.innerHTML = content;
       }
+      bubble.appendChild(body);
 
-      this.typewriterTimer = setInterval(() => {
-        if (this.charIndex < this.currentFullText.length) {
-          this.charIndex++;
-          if (this.textContent) {
-            this.textContent.textContent = this.currentFullText.slice(0, this.charIndex);
+      // Action Buttons (Optional interactive jumps/queries)
+      if (actions && actions.length > 0) {
+        const actionsGroup = document.createElement('div');
+        actionsGroup.className = 'chat-actions-group';
+
+        actionsGroup.addEventListener('click', (e) => {
+          const btn = e.target.closest('.chat-link-btn');
+          if (btn && btn.dataset.chatQuery) {
+            e.preventDefault();
+            this.submitDirectQuery(btn.dataset.chatQuery);
           }
-        } else {
-          this.finishTyping();
+        });
+
+        actions.forEach(act => {
+          const btn = document.createElement('a');
+          btn.className = `chat-link-btn ${act.accent ? 'accent-pink' : ''}`;
+          btn.href = act.url || '#';
+          btn.innerHTML = `${act.label} ↗`;
+
+          if (act.query) {
+            btn.dataset.chatQuery = act.query;
+          }
+          if (act.switchTab) {
+            btn.dataset.switchTab = act.switchTab;
+          }
+          if (act.scrollTo) {
+            btn.dataset.scrollTo = act.scrollTo;
+          }
+          if (act.url && act.url.startsWith('http')) {
+            btn.target = '_blank';
+            btn.rel = 'noopener noreferrer';
+          }
+
+          actionsGroup.appendChild(btn);
+        });
+
+        bubble.appendChild(actionsGroup);
+      }
+
+      row.appendChild(bubble);
+      this.historyViewport.appendChild(row);
+      this.scrollToBottom();
+
+      this.messages.push({ role, content, timestamp: Date.now() });
+    }
+
+    showTypingIndicator() {
+      if (!this.historyViewport) return null;
+
+      const row = document.createElement('div');
+      row.className = 'chat-msg-row bot';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-typing-bubble';
+      bubble.innerHTML = `
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      `;
+
+      row.appendChild(bubble);
+      this.historyViewport.appendChild(row);
+      this.scrollToBottom();
+      return row;
+    }
+
+    scrollToBottom() {
+      if (this.historyViewport) {
+        this.historyViewport.scrollTop = this.historyViewport.scrollHeight;
+      }
+    }
+
+    // ========================================================================
+    // INTELLIGENT KNOWLEDGE BASE & TOPIC MATCHER
+    // ========================================================================
+    buildKnowledgeBase() {
+      return [
+        {
+          id: 'identity',
+          keywords: ['who are you', 'who is nishant', 'tell me about yourself', 'about nishant', 'background', 'biography', 'identity', 'who is he', 'bio', 'intro'],
+          html: `<p><strong>Nishant Ekka</strong> is a builder, technologist, and computer science innovator with deep foundations in ISC Class 12 Computer Science.</p>
+                 <p>He specializes in scalable full-stack web applications, voice-enabled financial systems, cybersecurity perimeter auditing, embedded robotics, and real-time 3D WebGL experiences.</p>
+                 <p>His signature aesthetic blends precision systems architecture with original GTA Vice City-inspired retro-futurism.</p>`,
+          actions: [
+            { label: '📄 Character Dossier', scrollTo: 'about' },
+            { label: '⚔️ Technical Arsenal', scrollTo: 'skills' }
+          ]
+        },
+        {
+          id: 'voicekhata',
+          keywords: ['voicekhata', 'voice khata', 'voice ledger', 'voice bookkeeping', 'micro vendor', 'offline voice', 'render backend', 'hackday'],
+          html: `<p><strong>VoiceKhata</strong> is Nishant's featured flagship mission—a voice-first digital bookkeeping ledger engineered to eliminate digital literacy barriers for roadside merchants, micro-vendors, and small shops.</p>
+                 <p>By speaking natural language transactions, vendors automatically record debit and credit entries without complex spreadsheets or manual typing.</p>
+                 <p><strong>Architecture:</strong> Python backend, speech processing pipeline, financial ledger calculation engine, and live REST API deployment on Render.</p>`,
+          actions: [
+            { label: '🎙️ Live Render Service', url: 'https://voicekhata-hackday.onrender.com' },
+            { label: '📂 GitHub Repository', url: 'https://github.com/nishantekka2007-sys/voicekhata-hackday' }
+          ]
+        },
+        {
+          id: 'projects',
+          keywords: ['projects', 'what has he built', 'what projects', 'portfolio work', 'missions', 'creations', 'work', 'builds'],
+          html: `<p>Here are Nishant's primary documented engineering missions:</p>
+                 <ul>
+                   <li><strong>VoiceKhata:</strong> Voice-first bookkeeping ledger for micro-merchants with speech processing and cloud API deployment on Render.</li>
+                   <li><strong>Cyber Recon & Vulnerability Lab:</strong> Security audit and network topology exploration focusing on socket routines, port scans, and Linux hardening.</li>
+                   <li><strong>Vice City 3D Engine:</strong> The very website you are exploring! Featuring real-time Three.js 3D Traffic Racer driving physics, multi-gear synthesized Web Audio, and tactical camera presets.</li>
+                 </ul>`,
+          actions: [
+            { label: '🚀 Jump to Missions', scrollTo: 'projects' },
+            { label: '📂 GitHub Profile', url: 'https://github.com/nishantekka2007-sys' }
+          ]
+        },
+        {
+          id: 'security',
+          keywords: ['cyber recon', 'security', 'cybersecurity', 'vulnerability', 'ethical hacking', 'recon', 'port scanner', 'penetration', 'linux hardening'],
+          html: `<p><strong>Cyber Recon & Vulnerability Lab</strong> is Nishant's ethical hacking exploration sandbox.</p>
+                 <p>It investigates proactive defensive system hardening, network topology mapping, automated port scanning routines, and security header evaluations to understand attack surfaces and fortify digital perimeters.</p>`,
+          actions: [
+            { label: '🛡️ Security Mission Card', scrollTo: 'projects' },
+            { label: '⚔️ Defense Skills', scrollTo: 'skills' }
+          ]
+        },
+        {
+          id: 'tech_stack',
+          keywords: ['technology', 'technologies', 'tech stack', 'languages', 'skills', 'tools', 'python', 'javascript', 'c++', 'java', 'sql', 'frameworks', 'arsenal'],
+          html: `<p>Nishant's verified technical arsenal spans several core domains:</p>
+                 <ul>
+                   <li><strong>Languages:</strong> Python, Java, C / C++, HTML5 & CSS3, JavaScript, SQL, Bash / Shell.</li>
+                   <li><strong>Architecture & Web:</strong> RESTful APIs, WebGL (Three.js), Responsive Modern UI, Cloud Deployment (Render, Vercel).</li>
+                   <li><strong>Cybersecurity:</strong> Ethical security auditing, socket programming, defensive Linux hardening, network reconnaissance.</li>
+                   <li><strong>Embedded & IoT:</strong> Microcontroller systems, sensor telemetry integration, hardware logic.</li>
+                 </ul>`,
+          actions: [
+            { label: '⚔️ View Full Arsenal', scrollTo: 'skills' }
+          ]
+        },
+        {
+          id: 'games_and_demos',
+          keywords: ['game', 'games', 'traffic racer', 'coastal drive', 'car', 'drive', 'tactical stance', 'rooftop', 'easter egg', 'hidden', 'explore'],
+          html: `<p>You're inside an interactive Vice City terminal! Nishant built several playable experiences directly into this page:</p>
+                 <ul>
+                   <li><strong>Scene 3 — Traffic Racer:</strong> A full 3D coastal highway driving game with 6 traffic vehicle categories (Sports Coupe, Sedan, SUV, Van, Heavy Semi-Truck, City Bus), 5-speed synthesized engine sound, 80s synthwave music loop, 4 difficulty stages, and near-miss close calls!</li>
+                   <li><strong>Scene 4 — Tactical Stance:</strong> Rooftop vista sniper mode with 4 interactive camera perspectives and tactical night vision.</li>
+                   <li><strong>Scene 1 — Character Cinema Studio:</strong> 3D lighting studio with 5 Vice City sunset & neon atmospheres.</li>
+                 </ul>`,
+          actions: [
+            { label: '🏎️ Play Traffic Racer', switchTab: 'cruise' },
+            { label: '🎯 Launch Tactical Stance', switchTab: 'action' },
+            { label: '✨ Character Showcase', switchTab: 'idle' }
+          ]
+        },
+        {
+          id: 'interests',
+          keywords: ['interest', 'interests', 'passion', 'passions', 'hobbies', 'what does he like', 'beyond the terminal', 'photography', 'videography', 'video editing'],
+          html: `<p>Beyond the coding terminal, Nishant channels discipline and creative vision through:</p>
+                 <ul>
+                   <li><strong>Robotics & Hardware:</strong> Designing physical systems that interface with code.</li>
+                   <li><strong>Cybersecurity Research:</strong> Studying network resilience and ethical defense.</li>
+                   <li><strong>Videography & Photography:</strong> Cinematic visual storytelling, lighting direction, and digital color grading.</li>
+                 </ul>`,
+          actions: [
+            { label: '🌟 Beyond the Terminal', scrollTo: 'interests' }
+          ]
+        },
+        {
+          id: 'contact',
+          keywords: ['contact', 'hire', 'email', 'reach out', 'connect', 'social', 'github', 'message', 'collaborate'],
+          html: `<p>Interested in collaborating, recruiting, or discussing technical projects with Nishant?</p>
+                 <p>You can connect with him directly on GitHub or through the communications console below.</p>`,
+          actions: [
+            { label: '📬 Open Contact Section', scrollTo: 'contact' },
+            { label: '📂 GitHub: nishantekka2007-sys', url: 'https://github.com/nishantekka2007-sys' }
+          ]
+        },
+        {
+          id: 'greetings',
+          keywords: ['hi', 'hello', 'hey', 'sup', 'howdy', 'good morning', 'good evening', 'greetings', 'yo'],
+          html: `<p>Hey there! Great to meet you. I'm <strong>Nishant AI</strong>, ready to answer questions about Nishant's portfolio, missions, code, or games.</p>
+                 <p>What would you like to explore first?</p>`,
+          actions: [
+            { label: '👤 About Nishant', query: 'Who is Nishant?' },
+            { label: '🚀 View Projects', query: 'What projects has he built?' },
+            { label: '🏎️ Play Traffic Racer', switchTab: 'cruise' }
+          ]
+        },
+        {
+          id: 'gratitude',
+          keywords: ['thanks', 'thank you', 'cool', 'awesome', 'great', 'nice', 'good job', 'bye', 'goodbye'],
+          html: `<p>You're welcome! Glad I could help. Feel free to explore the interactive demos or jump to any section of the website whenever you like.</p>`,
+          actions: [
+            { label: '🏎️ Play Traffic Racer', switchTab: 'cruise' },
+            { label: '🚀 Explore Projects', scrollTo: 'projects' }
+          ]
         }
-      }, 26);
+      ];
     }
 
-    completeTypingImmediately() {
-      if (this.typewriterTimer) {
-        clearInterval(this.typewriterTimer);
-        this.typewriterTimer = null;
-      }
-      this.charIndex = this.currentFullText.length;
-      if (this.textContent) {
-        this.textContent.textContent = this.currentFullText;
-      }
-      this.finishTyping();
+    // ========================================================================
+    // RESPONSE GENERATOR (Extensible for remote LLM backend in future)
+    // ========================================================================
+    async generateResponse(userQuery) {
+      // NOTE FOR FUTURE LLM EXPANSION:
+      // If a real AI backend API is configured in the future, connect it here:
+      // if (window.NISHANT_AI_API_ENDPOINT) {
+      //   return await this.fetchRemoteLLMResponse(userQuery);
+      // }
+
+      // Default: Reliable, zero-latency local knowledge base matcher
+      return this.matchLocalKnowledge(userQuery);
     }
 
-    finishTyping() {
-      if (this.typewriterTimer) {
-        clearInterval(this.typewriterTimer);
-        this.typewriterTimer = null;
-      }
-      this.isTyping = false;
+    matchLocalKnowledge(query) {
+      const clean = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+      const queryWords = new Set(clean.split(' '));
+      const stopWords = new Set(['what', 'who', 'how', 'why', 'when', 'where', 'which', 'is', 'are', 'was', 'were', 'the', 'a', 'an', 'and', 'or', 'to', 'for', 'of', 'in', 'on', 'at', 'about', 'tell', 'me', 'can', 'you', 'he', 'his', 'him', 'your', 'my', 'do', 'does', 'did', 'have', 'has', 'had', 'this', 'that', 'with', 'built', 'build', 'like', 'there']);
 
-      if (this.btnLabel) {
-        if (this.lineIndex + 1 < this.activeLines.length) {
-          this.btnLabel.textContent = 'Continue ▶';
-        } else {
-          this.btnLabel.textContent = 'Explore Topics 💬';
+      let bestMatch = null;
+      let highestScore = 0;
+
+      for (const entry of this.knowledge) {
+        let score = 0;
+        for (const kw of entry.keywords) {
+          const kwClean = kw.toLowerCase().trim();
+          // 1. Exact phrase match with word boundaries
+          if (clean === kwClean || clean.startsWith(kwClean + ' ') || clean.endsWith(' ' + kwClean) || clean.includes(' ' + kwClean + ' ')) {
+            score += kwClean.length * 3 + 20;
+          } else {
+            // 2. Significant non-stop words match
+            const kwWords = kwClean.split(' ').filter(w => !stopWords.has(w) && w.length >= 3);
+            if (kwWords.length > 0) {
+              let hits = 0;
+              for (const w of kwWords) {
+                if (queryWords.has(w)) hits++;
+              }
+              if (hits === kwWords.length) {
+                score += hits * 10 + 10;
+              } else if (hits > 0 && kwWords.length > 1) {
+                score += hits * 4;
+              }
+            }
+          }
+        }
+
+        if (score > highestScore) {
+          highestScore = score;
+          bestMatch = entry;
         }
       }
 
-      if (this.statusPill) {
-        this.statusPill.textContent = 'LIVE';
-        this.statusPill.style.background = 'var(--hud-green)';
+      if (bestMatch && highestScore >= 12) {
+        return {
+          html: bestMatch.html,
+          actions: bestMatch.actions || []
+        };
       }
 
-      if (this.lineIndex + 1 >= this.activeLines.length) {
-        this.showChoicesCluster();
-      }
-    }
-
-    startTopic(topicKey) {
-      this.currentMode = 'topic';
-      this.currentTopic = topicKey;
-      this.activeLines = this.topicBranches[topicKey];
-      this.hideChoicesCluster();
-      this.startLine(0);
-    }
-
-    showChoicesCluster() {
-      if (this.choicesCluster) {
-        this.choicesCluster.style.display = 'block';
-      }
-    }
-
-    hideChoicesCluster() {
-      if (this.choicesCluster) {
-        this.choicesCluster.style.display = 'none';
-      }
-    }
-
-    toggleChoicesCluster() {
-      if (!this.choicesCluster) return;
-      if (this.choicesCluster.style.display === 'none') {
-        this.showChoicesCluster();
-      } else {
-        this.hideChoicesCluster();
-      }
-    }
-
-    restart() {
-      this.currentMode = 'intro';
-      this.currentTopic = null;
-      this.activeLines = this.introLines;
-      this.hideChoicesCluster();
-      this.startLine(0);
-    }
-
-    updateProgress() {
-      if (!this.progressIndicator) return;
-      if (this.currentMode === 'intro') {
-        this.progressIndicator.textContent = `${this.lineIndex + 1} / ${this.activeLines.length}`;
-      } else {
-        const topicName = this.currentTopic ? this.currentTopic.toUpperCase() : 'TOPIC';
-        this.progressIndicator.textContent = `${topicName} (${this.lineIndex + 1}/${this.activeLines.length})`;
-      }
+      // Intelligent Fallback with Helpful Suggestions
+      return {
+        html: `<p>I don't have that specific detail in my local portfolio knowledge base yet. As Nishant AI, I'm specifically programmed to discuss:</p>
+               <ul>
+                 <li><strong>Nishant's background</strong>, education & credentials</li>
+                 <li><strong>VoiceKhata</strong> and his featured software projects</li>
+                 <li><strong>Programming languages</strong>, tools & technical arsenal</li>
+                 <li><strong>Playable mini-games</strong> like the Traffic Racer 3D coastal drive</li>
+                 <li><strong>Contact details</strong> and how to reach out</li>
+               </ul>
+               <p>Try clicking one of the suggested topics below:</p>`,
+        actions: [
+          { label: '👤 Who is Nishant?', query: 'Who is Nishant?' },
+          { label: '🚀 Documented Missions', query: 'What projects has he built?' },
+          { label: '⚔️ Technical Arsenal', query: 'What technologies does he use?' },
+          { label: '🏎️ Play Traffic Racer', switchTab: 'cruise' }
+        ]
+      };
     }
   }
+
+  // Alias for backward compatibility
+  const DialogueEngine = DialogueChatbotEngine;
 
   // ==========================================================================
   // PART 2: TROPICAL COASTAL ARCADE CAR-DRIVING MINI-GAME (THREE.JS)
@@ -2803,6 +3054,15 @@
       }
     }
 
+    onTabActivated() {
+      const stage = document.getElementById('main-studio-stage');
+      if (stage) {
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+      }
+      this.setCameraPreset(this.currentPreset || 'front');
+    }
+
     setCameraPreset(preset) {
       this.currentPreset = preset;
 
@@ -2891,6 +3151,9 @@
       Object.keys(radios).forEach(id => {
         const input = document.getElementById(id);
         if (input) {
+          if (input.checked) {
+            this.activeTab = radios[id];
+          }
           input.addEventListener('change', (e) => {
             if (e.target.checked) {
               this.switchTab(radios[id]);
@@ -2898,22 +3161,65 @@
           });
         }
       });
+
+      // Direct label clicks for immediate responsive switching
+      const switcher = document.querySelector('.scene-switcher');
+      if (switcher) {
+        switcher.addEventListener('click', (e) => {
+          const tabLabel = e.target.closest('.scene-tab');
+          if (tabLabel) {
+            const forId = tabLabel.getAttribute('for');
+            if (forId && radios[forId]) {
+              const radio = document.getElementById(forId);
+              if (radio && !radio.checked) {
+                radio.checked = true;
+              }
+              this.switchTab(radios[forId]);
+            }
+          }
+        });
+      }
     }
 
     switchTab(tabName) {
       this.activeTab = tabName;
 
-      // When switching to car game, ensure carGame resizes cleanly after layout reflow
+      // 1. Reset studio stage scroll position to ensure zero viewport offset
+      const stage = document.getElementById('main-studio-stage');
+      if (stage) {
+        stage.scrollTop = 0;
+        stage.scrollLeft = 0;
+      }
+
+      // 2. Scene 2 (Chatbot) Tab Activation
+      if (tabName === 'talk' && this.dialogueEngine && this.dialogueEngine.onTabActivated) {
+        this.dialogueEngine.onTabActivated();
+      }
+
+      // 3. Scene 3 (Traffic Racer) Tab Activation
       if (tabName === 'cruise' && this.carGame) {
         const resizeAction = () => {
+          if (stage) {
+            stage.scrollTop = 0;
+            stage.scrollLeft = 0;
+          }
           const container = document.getElementById('three-game-viewport');
           if (container && this.carGame) {
-            this.carGame.resize(container.clientWidth, container.clientHeight);
+            const w = container.clientWidth || 960;
+            const h = container.clientHeight || 540;
+            this.carGame.resize(w, h);
+            this.carGame.render();
           }
         };
         resizeAction();
-        setTimeout(resizeAction, 60);
-        setTimeout(resizeAction, 250);
+        requestAnimationFrame(resizeAction);
+        setTimeout(resizeAction, 50);
+        setTimeout(resizeAction, 150);
+      }
+
+      // 4. Scene 4 (Tactical Stance) Tab Activation
+      if (tabName === 'action' && this.tacticalEngine && this.tacticalEngine.onTabActivated) {
+        this.tacticalEngine.onTabActivated();
       }
     }
 
@@ -2962,8 +3268,8 @@
         this.photoStudio.update(delta);
       }
 
-      // Update Scene 3: Arcade Car Game (only renders when game tab is active or loaded)
-      if (this.carGame) {
+      // Update Scene 3: Arcade Car Game (only renders when game tab is active)
+      if (this.carGame && this.activeTab === 'cruise') {
         this.carGame.update(delta);
         this.carGame.render();
       }
