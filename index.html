@@ -363,7 +363,7 @@
                   </div>
                 </div>
 
-                <!-- Top Center: Live Score, High Score & Overtakes -->
+                <!-- Top Center: Live Score, High Score & Stage Progression -->
                 <div class="game-score-box">
                   <div class="game-score-primary">
                     <span class="game-score-label">SCORE</span>
@@ -372,6 +372,9 @@
                   <div class="game-score-subrow">
                     <span class="game-best-label">BEST: <strong id="hud-best-val">0</strong></span>
                     <span class="game-overtake-badge">🚗 <strong id="hud-overtakes-val">0</strong> PASS</span>
+                  </div>
+                  <div class="game-stage-indicator-row">
+                    <span class="game-stage-pill" id="hud-stage-pill">STAGE 1: CRUISE</span>
                   </div>
                 </div>
 
@@ -386,13 +389,13 @@
                       <button type="button" class="game-env-btn" data-gamemode="auto" title="Continuous Automatic 24h Cycle">Auto</button>
                     </div>
                   </div>
-                  <button type="button" class="game-hud-btn game-btn-audio" id="btn-game-audio" title="Toggle Sound (Engine, Sfx)">🔊</button>
+                  <button type="button" class="game-hud-btn game-btn-audio" id="btn-game-audio" title="Audio Settings &amp; Volume">🔊 AUDIO</button>
                   <button type="button" class="game-hud-btn game-btn-pause" id="btn-game-pause" title="Pause or Resume (P / Esc)">⏸ PAUSE</button>
                   <button type="button" class="game-hud-btn game-btn-cam" id="btn-game-cam" title="Switch Camera View">📷 CAM</button>
                 </div>
               </div>
 
-              <!-- Center Notification Toast (Close calls, High Speed bonuses) -->
+              <!-- Center Notification Toast (Close calls, High Speed bonuses, Stage Ups) -->
               <div class="game-bonus-toast" id="game-bonus-toast" aria-live="polite"></div>
 
               <!-- High-Speed Warning Glow Indicator -->
@@ -426,29 +429,30 @@
               <div class="game-modal-card">
                 <div class="game-modal-badge">VICE CITY HIGHWAY PATROL</div>
                 <h3 class="game-modal-title">TRAFFIC RACER</h3>
-                <p class="game-modal-subtitle">High-speed endless highway driving across Vice City boulevard. Overtake traffic, dodge trucks &amp; buses, survive the rush.</p>
+                <p class="game-modal-subtitle">Outrun the city on the 4-lane coastal highway. Dodge sports coupes, sedans, SUVs, delivery vans, articulated heavy trucks &amp; transit buses.</p>
 
                 <div class="game-menu-stats-row">
                   <div class="game-menu-stat">
-                    <span class="stat-name">CAREER BEST SCORE</span>
+                    <span class="stat-name">CAREER BEST</span>
                     <strong class="stat-number" id="menu-best-score">0 PTS</strong>
                   </div>
                   <div class="game-menu-stat">
-                    <span class="stat-name">LANES</span>
-                    <strong class="stat-number">4 HIGHWAY</strong>
+                    <span class="stat-name">HIGHWAY</span>
+                    <strong class="stat-number">4 LANES</strong>
                   </div>
                   <div class="game-menu-stat">
                     <span class="stat-name">TRAFFIC CLASSES</span>
-                    <strong class="stat-number">5 TYPES</strong>
+                    <strong class="stat-number">6 FLEETS</strong>
                   </div>
                 </div>
 
                 <div class="game-pro-tips">
-                  <span>💡 <strong>TRAFFIC RACER RULES:</strong> Drive &gt; 100 KM/H for Speed Bonus &bull; Close overtake (&lt; 2m) gives +100 PTS Close Call bonus! &bull; Avoid collisions!</span>
+                  <span>💡 <strong>PRO RACER TIPS:</strong> Overtake within 2m at &gt;80 KM/H for +150 Close-Call bonus &bull; Speed &gt;100 KM/H for continuous high-speed score &bull; Avoid crashes!</span>
                 </div>
 
                 <div class="game-modal-actions">
                   <button type="button" class="game-btn-primary" id="btn-start-race">START RACE ▶</button>
+                  <button type="button" class="game-btn-secondary" id="btn-open-audio-settings">🔊 AUDIO SETTINGS</button>
                 </div>
               </div>
             </div>
@@ -456,12 +460,12 @@
             <!-- Pause Menu Overlay -->
             <div class="game-modal-overlay game-pause-overlay" id="game-pause-overlay" style="display: none;">
               <div class="game-modal-card">
-                <div class="game-modal-badge">GAME SUSPENDED</div>
+                <div class="game-modal-badge">HIGHWAY PATROL SUSPENDED</div>
                 <h3 class="game-modal-title">PAUSED</h3>
-                <p class="game-modal-subtitle">Take a breather, adjust your sunglasses, and get back on the asphalt.</p>
+                <p class="game-modal-subtitle">Take a breather, adjust your neon sunglasses, and get back to the race.</p>
 
                 <div class="game-pause-stats-row">
-                  <div>CURRENT SPEED: <strong id="pause-stat-speed">0 KM/H</strong></div>
+                  <div>SPEED: <strong id="pause-stat-speed">0 KM/H</strong></div>
                   <div>DISTANCE: <strong id="pause-stat-dist">0.0 KM</strong></div>
                   <div>SCORE: <strong id="pause-stat-score">0</strong></div>
                 </div>
@@ -469,18 +473,19 @@
                 <div class="game-modal-actions">
                   <button type="button" class="game-btn-primary" id="btn-resume-race">RESUME DRIVE ▶</button>
                   <button type="button" class="game-btn-secondary" id="btn-restart-from-pause">↺ RESTART RUN</button>
+                  <button type="button" class="game-btn-secondary" id="btn-pause-audio-settings">🔊 AUDIO</button>
                 </div>
               </div>
             </div>
 
-            <!-- MISSION FAILED / CRASHED Screen Overlay -->
+            <!-- MISSION FAILED / CRASHED Screen Overlay (Prominent Retry & Stats) -->
             <div class="game-modal-overlay game-gameover-overlay" id="game-gameover-overlay" style="display: none;">
               <div class="game-modal-card game-gameover-card">
                 <div class="game-gameover-header">
                   <span class="game-crash-icon">💥</span>
                   <div class="game-modal-badge danger">HIGHWAY COLLISION</div>
                   <h3 class="game-gameover-title">MISSION FAILED</h3>
-                  <div class="game-gameover-reason">VEHICLE TOTALED &bull; WRECKED IN TRAFFIC</div>
+                  <div class="game-gameover-reason">VEHICLE TOTALED &bull; HIGHWAY PATROL TERMINATED</div>
                 </div>
 
                 <div class="game-gameover-results-grid">
@@ -492,6 +497,10 @@
                   <div class="game-result-box">
                     <span class="result-label">DISTANCE RUN</span>
                     <strong class="result-value" id="gameover-distance">0.00 KM</strong>
+                  </div>
+                  <div class="game-result-box">
+                    <span class="result-label">STAGE REACHED</span>
+                    <strong class="result-value" id="gameover-stage">STAGE 1</strong>
                   </div>
                   <div class="game-result-box">
                     <span class="result-label">OVERTAKES</span>
@@ -506,14 +515,67 @@
                     <strong class="result-value" id="gameover-topspeed">0 KM/H</strong>
                   </div>
                   <div class="game-result-box">
-                    <span class="result-label">ALL-TIME BEST</span>
+                    <span class="result-label">CAREER BEST</span>
                     <strong class="result-value" id="gameover-best">0</strong>
                   </div>
                 </div>
 
-                <div class="game-modal-actions">
+                <!-- Prominent, High-Contrast Action Buttons (Never Cut Off!) -->
+                <div class="game-modal-actions gameover-actions-prominent">
                   <button type="button" class="game-btn-primary retry-btn" id="btn-retry-race">RETRY RACE ↺</button>
                   <button type="button" class="game-btn-secondary" id="btn-menu-from-gameover">MAIN MENU</button>
+                </div>
+                <div class="gameover-hint-subtext">Press [Space] or [Enter] to instantly Retry</div>
+              </div>
+            </div>
+
+            <!-- Audio Settings Modal Dialog -->
+            <div class="game-modal-overlay game-audio-modal" id="game-audio-modal" style="display: none;">
+              <div class="game-modal-card game-audio-card">
+                <div class="game-modal-badge">SYNTHESIZED SOUND SYSTEM</div>
+                <h3 class="game-modal-title">AUDIO SETTINGS</h3>
+                <p class="game-modal-subtitle">Control 80s synthwave music, multi-gear sports car engine sounds &amp; arcade effects.</p>
+
+                <div class="audio-settings-grid">
+                  <!-- Master Volume -->
+                  <div class="audio-control-row">
+                    <div class="audio-label-group">
+                      <span class="audio-control-name">MASTER VOLUME</span>
+                      <span class="audio-val-display" id="val-disp-master">80%</span>
+                    </div>
+                    <input type="range" class="audio-slider" id="slider-audio-master" min="0" max="100" value="80">
+                  </div>
+
+                  <!-- Music Volume & Toggle -->
+                  <div class="audio-control-row">
+                    <div class="audio-label-group">
+                      <span class="audio-control-name">SYNTHWAVE MUSIC</span>
+                      <button type="button" class="audio-toggle-btn active" id="toggle-audio-music">ON</button>
+                    </div>
+                    <input type="range" class="audio-slider" id="slider-audio-music" min="0" max="100" value="70">
+                  </div>
+
+                  <!-- Sound Effects Volume & Toggle -->
+                  <div class="audio-control-row">
+                    <div class="audio-label-group">
+                      <span class="audio-control-name">SOUND EFFECTS (SFX)</span>
+                      <button type="button" class="audio-toggle-btn active" id="toggle-audio-sfx">ON</button>
+                    </div>
+                    <input type="range" class="audio-slider" id="slider-audio-sfx" min="0" max="100" value="85">
+                  </div>
+
+                  <!-- Engine Sound Volume -->
+                  <div class="audio-control-row">
+                    <div class="audio-label-group">
+                      <span class="audio-control-name">ENGINE &amp; GEARS</span>
+                      <span class="audio-val-display" id="val-disp-engine">85%</span>
+                    </div>
+                    <input type="range" class="audio-slider" id="slider-audio-engine" min="0" max="100" value="85">
+                  </div>
+                </div>
+
+                <div class="game-modal-actions">
+                  <button type="button" class="game-btn-primary" id="btn-close-audio-settings">DONE &amp; SAVE</button>
                 </div>
               </div>
             </div>
