@@ -1,71 +1,114 @@
-# Nishant Ekka // Cinematic Vice City Character Studio & Coastal Car Game 🌴🚗✨
+# Nishant Ekka — Interactive Portfolio
 
-An original GTA VI / Vice City-inspired personal portfolio featuring an **Interactive Character Cinema Studio** based on Nishant's authentic photographic likeness and a **Playable 3D Coastal Arcade Driving Game**, built with **HTML5, CSS3, and Three.js (WebGL)**. Fully static, responsive, and ready for local preview or hosting.
+A cinematic personal portfolio inspired by neon-soaked coastal cities and retro arcade games. The site brings together a character-focused visual studio, a browser-based highway racing game, a portfolio dialogue interface, and the sections that introduce my work and interests.
 
-**Owner:** Nishant Ekka  
-**Visual Reference:** Curly dark hair, warm skin tone, slim build, black shirt, white trousers, black shoes.  
-**Tech Stack:** HTML5, CSS3, Vanilla JavaScript, Three.js WebGL  
-**Atmosphere:** Tropical Vice City sunset, turquoise coastal waters, palm trees, warm golden highlights, retro game HUD, and interactive 3D physics.
-
----
-
-## 🌴 1. Character Cinema Studio (Part 1)
-
-Transforming the character presentation into an elegant, interactive, cinematic photo showcase:
-- **Authentic Photographic Likeness:** Uses Nishant's real photograph (`assets/character/idle.webp` & `reference.jpg`) with natural human proportions. Zero low-poly or blocky mannequins.
-- **Layered Parallax Environment:** Multi-plane tropical background featuring a warm gradient sky, turquoise horizon glow, and framing palm foliage that subtly shifts with pointer movement.
-- **Cinematic Breathing & Floating:** Smooth, restrained floating animation applied subtly to the character frame container without synthetic body distortion.
-- **Dynamic Pointer Lighting Sweep:** Soft golden light sweep tracking mouse cursor coordinates across the stage.
-- **Interactive Lighting Environments:**
-  - 🌅 **Sunset:** Warm golden hour, peach, and coral tropical highlights.
-  - 🌃 **Night:** Deep oceanic indigo with neon turquoise and magenta rim lighting.
-  - 💡 **Spotlight:** High-contrast dramatic key light focused directly on Nishant.
-  - ↺ **Reset:** Instantly resets the camera and lighting to default state.
-- **Subtitled Dialogue Mode:** Tabbed scene featuring synchronized quote reveals and speaker HUD.
+<p align="center">
+  <a href="https://nishant-portfolio-psi-livid.vercel.app/"><strong>View Live Portfolio</strong></a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/nishantekka2007-sys/PORTFOLIO">Source Code</a>
+</p>
 
 ---
 
-## 🏎️ 2. Coastal Arcade Driving Mini-Game (Part 2)
+## Overview
 
-A real-time playable 3D driving arcade game built with Three.js WebGL:
-- **Player-Controllable 3D Exotic Sports Car:**
-  - Low-slung red 80s supercar with aerodynamic bodywork, rear wing spoiler, pop-up headlamps, and twin exhausts.
-  - 4 independently rotating wheels with treaded rubber tires, deep-dish alloy rims, silver brake discs, and red brake calipers.
-  - Real responsive steering: front wheels steer left/right, and vehicle body realistically rolls and pitches with acceleration and turning.
-- **Controls (Full Keyboard & Mobile Touch):**
-  - **Desktop Keyboard:** `W` / `▲` to Accelerate, `S` / `▼` to Brake & Reverse, `A` / `◀` to Steer Left, `D` / `▶` to Steer Right, `SPACE` for Handbrake Drift, `ESC` to Pause, `R` to Reset.
-  - **Mobile Touch Overlay:** Responsive on-screen directional buttons (`◀ STEER`, `STEER ▶`, `▼ BRAKE`, `▲ GAS`) isolated with `touch-action: manipulation` to prevent accidental page scrolling.
-- **Dynamic Coastal Highway:**
-  - Scenic coastal road with turquoise ocean and animated wave ripples on the left; swaying palm trees, streetlights, and skyline architecture on the right.
-- **Smooth Day & Night Cycle:**
-  - Continuous automatic transitions between Dawn, Day, Sunset, Dusk, and Night.
-  - Manual environment mode override buttons: `Day`, `Sunset`, `Night`, and `Auto`.
-- **Live Arcade HUD & Telemetry:**
-  - Real-time digital speedometer (0 - 150+ MPH), animated dynamic tachometer rev bar, distance odometer, and active environment indicator.
-  - 3 switchable camera perspectives (`📷 CAM`): Chase Cam, Low Wheel Cam, and Hood Driver Cam.
-  - Pause (`⏸ PAUSE`) and Reset (`↺ RESET`) controls.
+This project is an interactive portfolio built with web technologies. Its visual direction combines dark panels, neon pink and cyan accents, cinematic lighting, and a Vice City-inspired atmosphere.
 
----
+The goal is to make exploring a portfolio feel more like moving through a small interactive experience while keeping the content accessible from a regular browser.
 
-## ⚡ 3. Performance & Optimization
+## Highlights
 
-- **Power Optimization:** Automatically halts Three.js rendering via `IntersectionObserver` when the game or studio is scrolled out of view.
-- **Tab Inactivity:** Pauses simulation when the browser tab is hidden using the `visibilitychange` API.
-- **Strict Scope Preservation:** Zero modifications to external portfolio content; the hero, about dossier, skills, projects, timeline, achievements, and contact sections remain intact.
+- **Cinematic character studio** — a character-focused presentation with visual effects and scene controls.
+- **Traffic Racer-style driving game** — a browser-based highway arcade experience with steering, acceleration, braking, traffic, score tracking, collision handling, and environment controls.
+- **Dialogue Scene** — a portfolio assistant interface with suggested questions and a chat-style conversation layout.
+- **Tactical Stance scene** — a separate character-scene area currently being refined.
+- **Portfolio sections** — navigation for the introduction, studio, about, arsenal, missions, journey, passions, and radio.
+- **Responsive interface** — designed to adapt to different browser and screen sizes.
 
----
+> **Development note:** Interactive scenes are being iterated on. Rendering and initialization behaviour may depend on the browser and how the page is served locally; test the scenes in the target browser before presenting a build as production-ready.
 
-## 🚀 4. How to Preview & Test Locally
+## Technology
 
-You can open `index.html` directly in any modern browser:
+- **HTML5** for page structure
+- **CSS3** for layout, responsive styling, and visual effects
+- **Vanilla JavaScript** for interaction and game logic
+- **Three.js / WebGL** for 3D rendering in the driving experience
+
+The portfolio is primarily a front-end project. No backend setup is documented as a requirement for the basic site.
+
+## Run Locally
+
+For the most reliable local preview, serve the project over HTTP rather than opening the HTML file directly. This avoids browser restrictions that can affect JavaScript modules and local assets.
+
+### Option 1: Python
+
+1. Clone the repository and enter the project directory:
+
+   ```bash
+   git clone https://github.com/nishantekka2007-sys/PORTFOLIO.git
+   cd PORTFOLIO
+   ```
+
+2. Start a local server:
+
+   ```bash
+   python3 -m http.server 8000
+   ```
+
+3. Open [http://localhost:8000](http://localhost:8000) in your browser.
+
+Stop the server with `Ctrl+C` in the terminal.
+
+### Option 2: Node.js
+
+If Node.js is installed, you can use a lightweight static server:
+
 ```bash
-# In the portfolio directory:
-open index.html
-# Or serve with any static server:
 npx serve .
 ```
 
----
+Open the local URL printed by the command.
 
-## 📄 License
-Created for **Nishant Ekka**. Free to customize and adapt.
+## Game Controls
+
+The driving game supports keyboard controls:
+
+| Action | Control |
+|---|---|
+| Accelerate | `W` or `↑` |
+| Brake | `S` or `↓` |
+| Steer left | `A` or `←` |
+| Steer right | `D` or `→` |
+| Handbrake | `Space` |
+| Pause | `Esc` |
+| Reset | `R` |
+
+On-screen touch controls are provided for supported mobile layouts. Available controls can vary with the current game state.
+
+## Repository Notes
+
+- `index.html` — main portfolio page
+- `styles.css` — primary stylesheet
+- `js/` — JavaScript modules, including game logic
+- `assets/` — images and visual resources
+
+The structure above is a high-level guide; individual files and subdirectories may evolve as the project develops.
+
+## Deployment
+
+The live portfolio is hosted on Vercel:
+
+**[nishant-portfolio-psi-livid.vercel.app](https://nishant-portfolio-psi-livid.vercel.app/)**
+
+When the GitHub repository is connected to Vercel for automatic deployments, pushing changes to the configured branch can trigger a new deployment. Verify the deployment status in Vercel after publishing changes.
+
+## Author
+
+**Nishant Ekka**
+
+- Portfolio: [nishant-portfolio-psi-livid.vercel.app](https://nishant-portfolio-psi-livid.vercel.app/)
+- GitHub: [nishantekka2007-sys](https://github.com/nishantekka2007-sys)
+
+## License
+
+No license is currently specified in this repository. Contact the author before reusing or redistributing project code or assets.
