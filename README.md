@@ -9,7 +9,13 @@ A neon-inspired, Vice City-style portfolio featuring cinematic visuals, interact
   &nbsp; · &nbsp;
   <a href="https://github.com/nishantekka2007-sys"><strong>👤 GitHub Profile</strong></a>
   &nbsp; · &nbsp;
+<<<<<<< HEAD
   <a href="https://www.linkedin.com/in/nishant-ekka-375220429/"><strong>🔗 LinkedIn</strong></a>
+=======
+  <a href="mailto:nishantekka2007@gmail.com"><strong>✉️ Email</strong></a>
+  &nbsp; · &nbsp;
+  <a href="https://www.linkedin.com/in/nishant-ekka-375220429/"><strong>💼 LinkedIn</strong></a>
+>>>>>>> 8e04905 (Update portfolio contact details and Java skill)
 </p>
 
 ---
@@ -17,6 +23,7 @@ A neon-inspired, Vice City-style portfolio featuring cinematic visuals, interact
 ## ✨ Features
 
 - **Interactive portfolio** — About, Arsenal, Missions, Journey, Passions, and Radio sections.
+- **Technical Arsenal** — Core programming in Java, Python, C/C++, HTML5 & CSS3, plus cybersecurity and robotics.
 - **Character Studio** — a character-focused visual showcase.
 - **Traffic Racer-style game** — driving, traffic, collision handling, and keyboard controls.
 - **Dialogue Scene** — a chat-style portfolio assistant interface.
@@ -62,12 +69,22 @@ npx serve .
 
 Touch controls may be available on supported mobile layouts.
 
+<<<<<<< HEAD
 ## 📬 Contact
 
 - **Email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
 - **LinkedIn:** [linkedin.com/in/nishant-ekka-375220429](https://www.linkedin.com/in/nishant-ekka-375220429/)
 - **GitHub:** [nishantekka2007-sys](https://github.com/nishantekka2007-sys)
 - **Portfolio:** [nishant-portfolio-psi-livid.vercel.app](https://nishant-portfolio-psi-livid.vercel.app/)
+=======
+## 📬 Contact & Links
+
+- **Email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
+- **LinkedIn:** [https://www.linkedin.com/in/nishant-ekka-375220429/](https://www.linkedin.com/in/nishant-ekka-375220429/)
+- **GitHub:** https://github.com/nishantekka2007-sys
+- **Live site:** https://nishant-portfolio-psi-livid.vercel.app/
+- **Repository:** https://github.com/nishantekka2007-sys/PORTFOLIO
+>>>>>>> 8e04905 (Update portfolio contact details and Java skill)
 
 ## 📄 License
 
