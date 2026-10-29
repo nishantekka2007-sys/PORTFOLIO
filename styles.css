@@ -743,7 +743,8 @@ img {
 .studio-stage {
   position: relative;
   width: 100%;
-  height: 480px;
+  min-height: 560px;
+  height: clamp(540px, 66vh, 630px);
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid rgba(255, 42, 133, 0.4);
@@ -760,6 +761,7 @@ img {
   height: 100%;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.5s ease, visibility 0.5s ease;
   display: flex;
   overflow: hidden;
@@ -769,502 +771,1505 @@ img {
 #scene-toggle-idle:checked ~ .studio-stage #panel-idle,
 #scene-toggle-talk:checked ~ .studio-stage #panel-talk,
 #scene-toggle-cruise:checked ~ .studio-stage #panel-cruise,
-#scene-toggle-walk:checked ~ .studio-stage #panel-walk,
 #scene-toggle-action:checked ~ .studio-stage #panel-action {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   z-index: 5;
 }
 
-/* --- SCENE 1: IDLE STANCE & SUNSET --- */
-#panel-idle {
-  background: linear-gradient(180deg, #3d144c 0%, #170724 60%, #0d041c 100%);
-  align-items: center;
-  justify-content: center;
-}
-
-.idle-stage-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 960px;
-}
-
-.idle-info-card {
-  max-width: 440px;
-  background: rgba(11, 7, 23, 0.75);
-  border-left: 4px solid var(--neon-cyan);
-  padding: 1.5rem;
-  border-radius: 4px;
-  backdrop-filter: blur(8px);
-}
-
-.idle-character-slot {
+/* ==========================================================================
+   SCENE 1: CHARACTER CINEMA SHOWCASE (5 DISTINCT ENVIRONMENTS & TWO-COLUMN)
+   ========================================================================== */
+.photo-showcase-panel {
   position: relative;
-  height: 420px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.idle-character-slot img {
+  width: 100%;
   height: 100%;
-  object-fit: contain;
-  animation: characterIdleBreathe 4s ease-in-out infinite;
+  overflow: hidden;
 }
 
-/* --- SCENE 2: TALKING CHARACTER & SUBTITLES --- */
-#panel-talk {
-  background: radial-gradient(circle at 65% 50%, #46144e 0%, #150624 70%, #0b0214 100%);
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.talk-character-container {
+.showcase-bg-container {
   position: absolute;
-  right: 12%;
-  bottom: 0;
-  height: 440px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.talk-character-img {
+  inset: 0;
+  width: 100%;
   height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,0.8));
-}
-
-/* Mouth Layer / Sprite Overlay component */
-.talk-mouth-layer {
-  position: absolute;
-  top: 24%;
-  left: 47%;
-  width: 32px;
-  height: 20px;
+  overflow: hidden;
+  z-index: 1;
   pointer-events: none;
-  /* If talking mouth frame provided, will animate */
-  background-size: cover;
-  animation: mouthPhonemeSync 0.45s steps(2) infinite;
-  opacity: 0.75;
 }
 
-/* Dialogue Subtitle Panel */
-.dialogue-box {
+/* Sky Layers for 5 Distinct Environments */
+.showcase-sky-layer {
   position: absolute;
-  bottom: 1.8rem;
-  left: 5%;
-  width: 58%;
-  background: rgba(9, 5, 20, 0.92);
-  border: 1px solid rgba(255, 42, 133, 0.4);
-  border-left: 6px solid var(--neon-pink);
-  border-radius: 4px;
-  padding: 1.25rem 1.6rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 42, 133, 0.2);
-  backdrop-filter: blur(10px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.showcase-sky-layer.active {
+  opacity: 1;
+}
+
+.env-sky-sunset {
+  background: radial-gradient(circle at 75% 25%, #ff7b54 0%, #ff5277 34%, #6b1d5c 68%, #140726 100%);
+}
+
+.env-sky-neon {
+  background: radial-gradient(circle at 75% 20%, #173266 0%, #161845 38%, #0f0b29 72%, #050311 100%);
+}
+
+.env-sky-boulevard {
+  background: radial-gradient(circle at 75% 30%, #e07a5f 0%, #893168 35%, #2b1842 70%, #0c071a 100%);
+}
+
+.env-sky-oceanfront {
+  background: radial-gradient(circle at 75% 15%, #0d294a 0%, #091a33 40%, #060e1f 75%, #02040a 100%);
+}
+
+.env-sky-day {
+  background: radial-gradient(circle at 75% 20%, #70d6ff 0%, #38a3a5 45%, #185a9d 78%, #0d3b66 100%);
+}
+
+/* Scenery Layers for 5 Distinct Environments */
+.showcase-scenery-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out, transform 0.2s ease-out;
+}
+
+.showcase-scenery-layer.active {
+  opacity: 1;
+}
+
+/* 1. Tropical Sunset Beach */
+.showcase-scenery-layer.scenery-sunset {
+  background-image: url('assets/backgrounds/vice-city-sunset.webp');
+}
+
+/* 2. Neon Downtown */
+.showcase-scenery-layer.scenery-neon {
+  background-image: url('assets/backgrounds/neon-downtown.webp');
+}
+
+/* 3. Palm Boulevard */
+.showcase-scenery-layer.scenery-boulevard {
+  background-image: url('assets/backgrounds/palm-boulevard.webp');
+}
+
+/* 4. Oceanfront Night */
+.showcase-scenery-layer.scenery-oceanfront {
+  background-image: url('assets/backgrounds/oceanfront-night.webp');
+}
+
+/* 5. Bright Tropical Day */
+.showcase-scenery-layer.scenery-day {
+  background-image: url('assets/backgrounds/tropical-day.webp');
+}
+
+/* Atmospheric Scenery Accents */
+.scenery-sunset .scenery-sunset-sun {
+  position: absolute;
+  right: 22%;
+  top: 18%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 247, 214, 0.4) 0%, rgba(255, 170, 0, 0.25) 50%, transparent 75%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.scenery-neon .scenery-neon-glows {
+  position: absolute;
+  top: 30%;
+  right: 25%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.25) 0%, rgba(0, 240, 255, 0.15) 50%, transparent 75%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+/* Framing Layer & Lighting Sweep */
+.showcase-framing-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 98% 85%, rgba(18, 55, 35, 0.4) 0%, transparent 40%),
+              radial-gradient(circle at 2% 85%, rgba(20, 50, 35, 0.3) 0%, transparent 35%);
+  z-index: 3;
+}
+
+.showcase-light-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle at center, rgba(255, 235, 180, 0.18) 0%, rgba(255, 107, 53, 0.08) 35%, transparent 65%);
+}
+
+.showcase-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(10, 6, 20, 0.72) 100%);
+}
+
+/* Two-Column Desktop Grid Layout */
+.showcase-content-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 390px) 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 3.5rem;
+  align-items: center;
+  position: relative;
   z-index: 10;
 }
 
-.dialogue-speaker {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-style: italic;
+/* Column 1: Compact Dossier Card & Environment Controls */
+.showcase-info-dossier {
+  background: rgba(13, 8, 26, 0.84);
+  border-left: 4px solid var(--neon-pink);
+  border-top: 1px solid rgba(255, 42, 133, 0.25);
+  border-right: 1px solid rgba(255, 42, 133, 0.25);
+  border-bottom: 1px solid rgba(255, 42, 133, 0.25);
+  border-radius: 6px;
+  padding: 1.35rem 1.5rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
+}
+
+.showcase-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.showcase-env-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid var(--neon-cyan);
   color: var(--neon-cyan);
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
+}
+
+.showcase-name {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0.1rem 0;
+  text-shadow: 1px 1px 0 var(--neon-pink);
+}
+
+.showcase-tagline {
+  font-size: 0.92rem;
+  color: var(--sunset-gold);
+  font-weight: 500;
+  margin-bottom: 0.45rem;
+}
+
+.showcase-desc {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Environment Controls Cluster */
+.showcase-env-controls {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 0.85rem;
+}
+
+.env-ctrl-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.env-ctrl-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--neon-cyan);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.env-timer-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sunset-gold);
+}
+
+.env-carousel-nav {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.55rem;
+}
+
+.env-nav-btn {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.env-nav-btn:hover {
+  background: rgba(255, 42, 133, 0.2);
+  color: #fff;
+  border-color: var(--neon-pink);
+}
+
+.env-nav-btn.active {
+  background: rgba(0, 240, 255, 0.2);
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.env-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.env-pill-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.32rem 0.65rem;
+  border-radius: 4px;
+  background: rgba(18, 12, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.env-pill-btn:hover {
+  color: #fff;
+  border-color: var(--neon-pink);
+  background: rgba(255, 42, 133, 0.15);
+}
+
+.env-pill-btn.active {
+  background: var(--neon-pink);
+  border-color: #ff66a0;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 0 12px var(--neon-pink-glow);
+}
+
+/* Column 2: Unobstructed Character Stage Frame */
+.showcase-character-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.showcase-character-rig {
+  position: relative;
+  height: 94%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  animation: photoCinematicFloat 5.2s ease-in-out infinite;
+  transform-origin: center bottom;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.showcase-pedestal {
+  position: relative;
+  width: 320px;
+  height: 28px;
+  margin-bottom: -10px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pedestal-rim {
+  width: 100%;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, rgba(17, 9, 36, 0.85) 70%, transparent 100%);
+  border: 2px solid rgba(255, 170, 0, 0.5);
+  box-shadow: 0 0 25px rgba(255, 107, 53, 0.45);
+  transition: all 0.6s ease;
+}
+
+.pedestal-shadow {
+  position: absolute;
+  bottom: -4px;
+  width: 82%;
+  height: 14px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.88) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.pedestal-reflection {
+  position: absolute;
+  top: 2px;
+  width: 65%;
+  height: 10px;
+  background: radial-gradient(ellipse, rgba(255, 42, 133, 0.3) 0%, transparent 75%);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+.showcase-photo-frame {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  height: 88%;
+}
+
+.showcase-photo-img {
+  max-height: 480px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: translateZ(0);
+}
+
+@keyframes photoCinematicFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* ==========================================================================
+   SCENE 2: TALKING CHARACTER & BRANCHING DIALOGUE ENGINE
+   ========================================================================== */
+.dialogue-scene-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dialogue-bg-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dialogue-bg-sky {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(10, 5, 20, 0.25) 0%, rgba(10, 5, 20, 0.65) 100%), url('assets/backgrounds/palm-boulevard.webp');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.dialogue-bg-skyline {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  width: 100%;
+  height: 45%;
+  background-image: 
+    repeating-linear-gradient(90deg, rgba(255, 42, 133, 0.12) 0, rgba(255, 42, 133, 0.12) 30px, transparent 30px, transparent 70px),
+    repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.1) 0, rgba(0, 240, 255, 0.1) 40px, transparent 40px, transparent 110px);
+  opacity: 0.6;
+}
+
+.dialogue-bg-terrace {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(255, 42, 133, 0.15) 0%, #15092a 60%, #080212 100%);
+  border-top: 2px solid var(--neon-pink);
+  box-shadow: 0 -4px 20px rgba(255, 42, 133, 0.35);
+}
+
+.dialogue-ambient-light {
+  position: absolute;
+  right: 25%;
+  top: 20%;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, transparent 70%);
+  filter: blur(30px);
+}
+
+.dialogue-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 480px) 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 3.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.dialogue-terminal-panel {
+  background: rgba(10, 6, 22, 0.88);
+  border-left: 5px solid var(--neon-cyan);
+  border-top: 1px solid rgba(0, 240, 255, 0.25);
+  border-right: 1px solid rgba(0, 240, 255, 0.25);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 6px;
+  padding: 1.35rem 1.6rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.dialogue-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.dialogue-speaker-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.speaker-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--neon-cyan);
+  letter-spacing: 1px;
+}
+
+.speaker-status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  background: var(--neon-pink);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.dialogue-progress {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--sunset-gold);
+}
+
+.dialogue-text-viewport {
+  min-height: 85px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  background: rgba(18, 12, 34, 0.45);
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dialogue-text-content {
+  font-family: var(--font-subtitle);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #ffffff;
+  font-weight: 500;
+  display: inline;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.dialogue-cursor {
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+  font-size: 1.1rem;
+  display: inline-block;
+  animation: cursorBlink 0.8s infinite;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Branching Choices Cluster */
+.dialogue-choices-cluster {
+  margin-bottom: 1rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed rgba(0, 240, 255, 0.3);
+}
+
+.choices-prompt-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--sunset-gold);
+  letter-spacing: 1px;
+  margin-bottom: 0.45rem;
+}
+
+.choices-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.dialogue-choice-btn {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  background: rgba(255, 42, 133, 0.12);
+  border: 1px solid rgba(255, 42, 133, 0.35);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.dialogue-badge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-style: normal;
+.dialogue-choice-btn:hover {
   background: var(--neon-pink);
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
+  border-color: #ff66a0;
+  box-shadow: 0 0 10px var(--neon-pink-glow);
 }
 
-/* Staged text reveals with CSS animation delays */
-.dialogue-line-container {
-  position: relative;
-  min-height: 58px;
-}
-
-.dialogue-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  font-family: var(--font-subtitle);
-  font-size: 1.15rem;
-  color: #fff;
-  font-weight: 500;
-  text-shadow: 1px 1px 2px #000;
-  opacity: 0;
-  transform: translateY(6px);
-}
-
-/* Sequential dialogue lines cycling through CSS keyframes */
-#scene-toggle-talk:checked ~ .studio-stage .line-1 {
-  animation: dialogFadeCycle1 12s ease-in-out infinite;
-}
-
-#scene-toggle-talk:checked ~ .studio-stage .line-2 {
-  animation: dialogFadeCycle2 12s ease-in-out infinite;
-}
-
-#scene-toggle-talk:checked ~ .studio-stage .line-3 {
-  animation: dialogFadeCycle3 12s ease-in-out infinite;
-}
-
-.dialogue-note {
-  margin-top: 0.8rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--sunset-gold);
-  border-top: 1px dashed rgba(255, 170, 0, 0.3);
-  padding-top: 0.4rem;
-}
-
-/* --- SCENE 3: VEHICLE HIGHWAY SCENE --- */
-#panel-cruise {
-  position: relative;
-  background: #080312;
-  overflow: hidden;
-}
-
-/* Parallax Background Skyline */
-.cruise-skyline {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 70%;
-  background-image: url('assets/backgrounds/vice-city-sunset.webp');
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  filter: brightness(0.7) contrast(1.15);
-  animation: parallaxTravel 24s linear infinite;
-  z-index: 1;
-}
-
-/* Moving Road */
-.cruise-road {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 38%;
-  background: linear-gradient(180deg, #1f1a2e 0%, #100b1d 60%, #07040d 100%);
-  border-top: 3px solid var(--neon-pink);
-  box-shadow: 0 -4px 15px rgba(255, 42, 133, 0.4);
-  z-index: 2;
-  overflow: hidden;
-}
-
-/* Moving Road Markings */
-.road-markings {
-  position: absolute;
-  top: 48%;
-  left: 0;
-  width: 200%;
-  height: 6px;
-  background: repeating-linear-gradient(90deg, var(--sunset-gold) 0, var(--sunset-gold) 60px, transparent 60px, transparent 120px);
-  animation: roadStripTravel 1.4s linear infinite;
-}
-
-/* Moving Streetlights Overlay */
-.streetlights-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: repeating-linear-gradient(90deg, rgba(0, 240, 255, 0.12) 0, transparent 30px, transparent 350px);
-  animation: roadStripTravel 2.8s linear infinite;
-  pointer-events: none;
-  z-index: 4;
-}
-
-/* Vehicle Entity */
-.cruise-vehicle-wrapper {
-  position: absolute;
-  bottom: 6%;
-  left: 12%;
-  width: 480px;
-  height: auto;
-  z-index: 3;
-  animation: vehicleDriveSway 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.9)) drop-shadow(0 -5px 15px rgba(255, 42, 133, 0.35));
-}
-
-.cruise-vehicle-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-/* Vehicle Underglow & Headlight Beam */
-.vehicle-underglow {
-  position: absolute;
-  bottom: -4px;
-  left: 10%;
-  width: 80%;
-  height: 16px;
-  background: radial-gradient(ellipse, var(--neon-pink) 0%, rgba(255, 42, 133, 0.4) 60%, transparent 80%);
-  border-radius: 50%;
-  filter: blur(5px);
-}
-
-.headlight-beam {
-  position: absolute;
-  top: 32%;
-  left: -80px;
-  width: 140px;
-  height: 80px;
-  background: linear-gradient(270deg, rgba(255, 255, 255, 0.6) 0%, rgba(0, 240, 255, 0.25) 50%, transparent 100%);
-  transform: rotate(-10deg);
-  filter: blur(6px);
-  pointer-events: none;
-}
-
-/* Cruise HUD Overlay */
-.cruise-hud-panel {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: rgba(11, 7, 23, 0.88);
-  border: 1px solid var(--neon-cyan);
-  padding: 0.8rem 1.25rem;
-  border-radius: 4px;
-  backdrop-filter: blur(8px);
-  z-index: 10;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-}
-
-.speedometer {
-  font-size: 1.4rem;
-  color: var(--neon-pink);
-  font-family: var(--font-display);
-  font-style: italic;
-}
-
-.cruise-cta {
-  display: inline-block;
-  margin-top: 0.5rem;
-  font-size: 0.75rem;
+.dialogue-choice-btn .choice-num {
   color: var(--neon-cyan);
-  border-bottom: 1px dashed var(--neon-cyan);
+  font-weight: 700;
 }
 
-/* --- SCENE 4: WALKING / RUNNING MOTION & SPRITE ENGINE --- */
-#panel-walk {
-  background: linear-gradient(180deg, #2b0c3d 0%, #140521 65%, #0b0213 100%);
-  position: relative;
-  overflow: hidden;
-}
-
-.motion-parallax-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 80%;
-  background-image: url('assets/backgrounds/vice-city-sunset.webp');
-  background-repeat: repeat-x;
-  background-size: auto 100%;
-  filter: brightness(0.65) saturate(1.1);
-  animation: parallaxTravel 32s linear infinite;
-  z-index: 1;
-}
-
-.motion-sidewalk {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 25%;
-  background: linear-gradient(180deg, #281d3d 0%, #160e24 100%);
-  border-top: 2px solid var(--neon-cyan);
-  box-shadow: 0 -3px 15px rgba(0, 240, 255, 0.3);
-  z-index: 2;
-}
-
-/* Character Motion Container */
-.motion-character-box {
-  position: absolute;
-  bottom: 8%;
-  left: 0;
-  height: 380px;
-  z-index: 3;
-  /* Cinematic camera sweep: glide across screen using CSS transforms */
-  animation: characterScreenGlide 14s linear infinite;
-}
-
-/* Modular CSS Sprite-Sheet Component */
-.sprite-player {
-  width: var(--frame-width);
-  height: var(--frame-height);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Multi-frame sprite animation mode using steps() */
-.sprite-player.sprite-animated {
-  background-repeat: no-repeat;
-  animation: spriteCycle var(--run-speed) steps(var(--frame-count)) infinite;
-}
-
-/* Single-image honest fallback mode */
-.sprite-player.single-image-fallback {
-  width: auto;
-  height: 100%;
+.dialogue-action-bar {
   display: flex;
-  align-items: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.sprite-player.single-image-fallback img {
-  height: 100%;
-  object-fit: contain;
-  /* Bobbing pace animation that simulates walking translation without fake leg gait */
-  animation: singleImagePace 1.2s ease-in-out infinite;
-}
-
-/* Motion Mode Switcher & Spec Card */
-.motion-spec-card {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  max-width: 380px;
-  background: rgba(11, 7, 23, 0.9);
-  border-left: 4px solid var(--neon-cyan);
-  padding: 1rem 1.25rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  z-index: 10;
-  backdrop-filter: blur(8px);
-}
-
-.spec-title {
+.dialogue-btn {
   font-family: var(--font-display);
-  font-size: 0.95rem;
-  color: var(--neon-cyan);
+  font-size: 0.85rem;
   font-style: italic;
   letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
 }
 
-/* --- SCENE 5: FICTIONAL ACTION THEATER --- */
-#panel-action {
-  background: radial-gradient(circle at center, #35082e 0%, #15031b 60%, #06010a 100%);
+.dialogue-btn-continue {
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 12px var(--neon-pink-glow);
+}
+
+.dialogue-btn-continue:hover {
+  background: #ff529d;
+}
+
+.dialogue-btn-topics, .dialogue-btn-restart {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+}
+
+.dialogue-btn-topics:hover, .dialogue-btn-restart:hover {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--neon-cyan);
+  color: #fff;
+}
+
+.dialogue-hint-footer {
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+.dialogue-character-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 440px;
+}
+
+.dialogue-character-frame {
   position: relative;
-  overflow: hidden;
-  align-items: center;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
   justify-content: center;
 }
 
-.action-trigger-toggle {
-  display: none;
-}
-
-/* Action Stage Box with Camera Shake on Fire */
-.action-arena {
-  width: 90%;
-  height: 90%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px dashed rgba(255, 42, 133, 0.4);
-  border-radius: 6px;
-  padding: 1.5rem;
-}
-
-/* Pure CSS Screen Shake when Strike trigger is targeted */
-#action-strike:target .action-arena,
-#action-trigger:checked ~ .action-arena {
-  animation: cameraShake 0.45s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-/* Muzzle Flash synchronization */
-.muzzle-flash-box {
-  position: absolute;
-  top: 36%;
-  right: 48%;
-  width: 140px;
-  height: 140px;
-  pointer-events: none;
-  opacity: 0;
-  transform: scale(0.4) rotate(15deg);
-  z-index: 15;
-}
-
-#action-strike:target .muzzle-flash-box,
-#action-trigger:checked ~ .action-arena .muzzle-flash-box {
-  animation: muzzleBurst 0.4s ease-out forwards;
-}
-
-.action-fighter-slot {
-  position: relative;
-  height: 380px;
-  display: flex;
-  align-items: flex-end;
-}
-
-.action-fighter-slot img {
-  height: 100%;
+.dialogue-character-img {
+  height: 460px;
+  max-height: 90%;
+  width: auto;
   object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
 }
 
-/* Tactical HUD & Fallback Notice */
-.action-tactical-dossier {
-  max-width: 440px;
-  background: rgba(11, 7, 23, 0.92);
-  border: 1px solid var(--neon-pink);
+.dialogue-photo-rim-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at bottom center, rgba(0, 240, 255, 0.18) 0%, transparent 65%);
+}
+
+/* ==========================================================================
+   SCENE 3: TROPICAL COASTAL ARCADE CAR-DRIVING MINI-GAME
+   ========================================================================== */
+.arcade-game-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #080312;
+}
+
+.three-game-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.three-game-viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Arcade Driving Game HUD Overlay */
+.game-hud-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Top Toolbar Container: Telemetry, Day/Night Selector, Actions */
+.game-hud-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  pointer-events: none;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.game-hud-top-bar > * {
+  pointer-events: auto;
+}
+
+/* Speedometer Cluster */
+.game-telemetry-box {
+  background: rgba(11, 7, 23, 0.88);
+  border: 1px solid var(--neon-cyan);
+  border-left: 4px solid var(--neon-pink);
   border-radius: 4px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 0 20px rgba(255, 42, 133, 0.25);
-  font-size: 0.85rem;
+  padding: 0.6rem 0.9rem;
+  max-width: 180px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  pointer-events: auto;
 }
 
-.tactical-header {
+.game-speedo-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.game-speedo-val {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   font-style: italic;
   color: var(--neon-pink);
+  line-height: 1;
+  text-shadow: 0 0 10px var(--neon-pink-glow);
+}
+
+.game-speedo-unit {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--neon-cyan);
   letter-spacing: 1px;
+}
+
+.game-rev-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+  margin: 0.4rem 0;
+  overflow: hidden;
+}
+
+.game-rev-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--sunset-gold) 70%, var(--neon-pink) 100%);
+  transition: width 0.08s ease-out;
+}
+
+.game-distance-row {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-distance-val {
+  color: var(--sunset-gold);
+}
+
+/* Day/Night Environment Selector */
+.game-env-selector {
+  background: rgba(11, 7, 23, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 0.35rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+}
+
+.game-env-status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sunset-gold);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.game-env-btn-group {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.game-env-btn {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-style: italic;
+  padding: 0.2rem 0.55rem;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.game-env-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.game-env-btn.active {
+  background: var(--neon-pink);
+  color: #fff;
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 8px var(--neon-pink-glow);
+}
+
+/* Top Right Game Action Buttons */
+.game-actions-cluster {
+  position: static;
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: auto;
+}
+
+.game-hud-btn {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  background: rgba(11, 7, 23, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.game-hud-btn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.game-btn-cam {
+  border-color: var(--sunset-gold);
+  color: var(--sunset-gold);
+}
+
+/* Desktop Hints */
+.game-desktop-hints {
+  align-self: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  background: rgba(11, 7, 23, 0.75);
+  padding: 0.35rem 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
   margin-bottom: 0.4rem;
 }
 
-.action-controls {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1rem;
+.hint-badge {
+  color: var(--neon-cyan);
+  font-weight: 700;
 }
 
-.action-fire-btn {
+/* Mobile Touch Driving Controls */
+.game-touch-controls {
+  display: none;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: auto;
+  margin-bottom: 0.4rem;
+  touch-action: none;
+}
+
+.touch-cluster-left, .touch-cluster-right {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.touch-btn {
+  width: 72px;
+  height: 56px;
+  border-radius: 8px;
+  background: rgba(11, 7, 23, 0.88);
+  border: 2px solid var(--neon-cyan);
+  color: #fff;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-style: italic;
   letter-spacing: 1px;
-  padding: 0.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.touch-btn-gas {
+  border-color: var(--hud-green);
+  color: var(--hud-green);
+}
+
+.touch-btn-brake {
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.touch-btn:active, .touch-btn.touch-active {
+  transform: scale(0.92);
+  filter: brightness(1.3);
+}
+
+/* ==========================================================================
+   SCENE 4: TACTICAL STANCE & ROOFTOP VISTA (COMPLETE & INTENTIONAL)
+   ========================================================================== */
+.tactical-scene-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.tactical-bg-stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tactical-bg-sky {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(180deg, rgba(8, 4, 18, 0.25) 0%, rgba(8, 4, 18, 0.65) 100%), url('assets/backgrounds/neon-downtown.webp');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+.tactical-bg-skyline {
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: 
+    repeating-linear-gradient(90deg, #1c113b 0px, #1c113b 40px, transparent 40px, transparent 75px),
+    repeating-linear-gradient(90deg, #27144d 0px, #27144d 60px, transparent 60px, transparent 110px);
+  mask-image: linear-gradient(180deg, transparent 0%, black 20%, black 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 20%, black 100%);
+  opacity: 0.75;
+}
+
+.tactical-bg-rooftop {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 32%;
+  background: linear-gradient(180deg, rgba(255, 42, 133, 0.2) 0%, #150926 40%, #070312 100%);
+  border-top: 2px solid var(--neon-pink);
+  box-shadow: 0 -4px 25px rgba(255, 42, 133, 0.4);
+}
+
+.tactical-ambient-neon {
+  position: absolute;
+  right: 20%;
+  top: 15%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255, 42, 133, 0.3) 0%, rgba(0, 240, 255, 0.15) 50%, transparent 75%);
+  filter: blur(30px);
+}
+
+.tactical-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(8, 4, 18, 0.75) 100%);
+}
+
+/* Tactical Layout Grid */
+.tactical-layout-grid {
+  display: grid;
+  grid-template-columns: minmax(360px, 450px) 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 3.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.tactical-dossier-panel {
+  background: rgba(12, 7, 24, 0.86);
+  border-left: 5px solid var(--neon-pink);
+  border-top: 1px solid rgba(255, 42, 133, 0.3);
+  border-right: 1px solid rgba(255, 42, 133, 0.3);
+  border-bottom: 1px solid rgba(255, 42, 133, 0.3);
+  border-radius: 6px;
+  padding: 1.35rem 1.6rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.tactical-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.tactical-status-indicator {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: rgba(0, 255, 170, 0.15);
+  border: 1px solid var(--hud-green);
+  color: var(--hud-green);
+  letter-spacing: 1px;
+}
+
+.tactical-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: 1px;
+  margin: 0.1rem 0;
+}
+
+.tactical-role {
+  font-size: 0.88rem;
+  color: var(--sunset-gold);
+  margin-bottom: 0.85rem;
+  font-weight: 500;
+}
+
+/* Tactical Stats Grid */
+.tactical-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  background: rgba(18, 11, 35, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.tactical-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--neon-cyan);
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-size: 0.82rem;
+  color: #fff;
+}
+
+.stat-value.text-gold {
+  color: var(--sunset-gold);
+}
+
+/* Camera Preset Controls */
+.tactical-cam-controls {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.tactical-ctrl-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--neon-cyan);
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.tactical-cam-btn-group {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.tactical-cam-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tactical-cam-btn:hover {
+  background: rgba(0, 240, 255, 0.18);
+  border-color: var(--neon-cyan);
+  color: #fff;
+}
+
+.tactical-cam-btn.active {
+  background: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--neon-cyan-glow);
+}
+
+.tactical-actions-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.action-strike-btn {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
   border-radius: 4px;
   background: var(--neon-pink);
   color: #fff;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 10px var(--neon-pink-glow);
-  display: inline-block;
-  text-align: center;
+  box-shadow: 0 0 12px var(--neon-pink-glow);
+  transition: all 0.2s ease;
 }
 
-.action-fire-btn:hover {
+.action-strike-btn:hover {
   background: #ff529d;
+}
+
+.tactical-reset-btn {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tactical-reset-btn:hover {
   color: #fff;
+  border-color: var(--sunset-gold);
+}
+
+.tactical-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--sunset-gold);
+  line-height: 1.4;
+}
+
+/* Character Column in Tactical Scene */
+.tactical-character-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 440px;
+}
+
+.tactical-character-rig {
+  position: relative;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-origin: center bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+/* Camera Preset Transforms */
+.cam-preset-front .tactical-character-rig {
+  position: relative;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-origin: center bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.cam-preset-portrait .tactical-character-rig {
+  position: relative;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-origin: center bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.cam-preset-wide .tactical-character-rig {
+  position: relative;
+  height: 100%;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  transform-origin: center bottom;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.tactical-pedestal {
+  position: relative;
+  width: 300px;
+  height: 24px;
+  margin-bottom: -8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tactical-rim {
+  width: 100%;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 42, 133, 0.2) 0%, rgba(17, 9, 36, 0.8) 70%, transparent 100%);
+  border: 2px solid rgba(255, 42, 133, 0.5);
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+}
+
+.tactical-shadow {
+  position: absolute;
+  bottom: -4px;
+  width: 80%;
+  height: 12px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.88) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+.tactical-photo-frame {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  min-height: 420px;
+}
+
+.tactical-photo-img {
+  height: 460px;
+  max-height: 90%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+}
+
+.tactical-photo-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at bottom, rgba(255, 42, 133, 0.2) 0%, transparent 60%);
+}
+
+/* Combat Screen Shake & Muzzle Flash */
+.tactical-scene-panel.shaking .tactical-layout-grid {
+  animation: cameraShake 0.45s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.tactical-muzzle-flash {
+  position: absolute;
+  top: 36%;
+  right: 32%;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.4) rotate(15deg);
+  z-index: 25;
+}
+
+.tactical-scene-panel.shaking .tactical-muzzle-flash {
+  animation: muzzleBurst 0.4s ease-out forwards;
+}
+
+@keyframes cameraShake {
+  10%, 90% { transform: translate3d(-2px, 2px, 0); }
+  20%, 80% { transform: translate3d(3px, -3px, 0); }
+  30%, 50%, 70% { transform: translate3d(-5px, 4px, 0); }
+  40%, 60% { transform: translate3d(5px, -4px, 0); }
+}
+
+@keyframes muzzleBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.35) rotate(18deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: scale(1.1) rotate(12deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(30deg);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN ACROSS TABLET & MOBILE VIEWPORTS
+   ========================================================================== */
+@media (max-width: 960px) {
+  .studio-stage {
+    min-height: 620px;
+    height: auto;
+  }
+  
+  .showcase-content-grid,
+  .dialogue-layout-grid,
+  .tactical-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    align-items: stretch;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .showcase-character-column,
+  .dialogue-character-column,
+  .tactical-character-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 440px;
+}
+
+  .showcase-photo-img,
+  .dialogue-character-img,
+  .tactical-photo-img {
+  height: 460px;
+  max-height: 90%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+}
+
+  .showcase-info-dossier,
+  .dialogue-terminal-panel,
+  .tactical-dossier-panel {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .game-touch-controls {
+    display: flex;
+  }
+
+  .game-desktop-hints {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .showcase-content-grid,
+  .dialogue-layout-grid,
+  .tactical-layout-grid {
+    padding: 1rem 0.8rem;
+  }
+
+  .showcase-character-column,
+  .dialogue-character-column,
+  .tactical-character-column {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  min-height: 440px;
+}
+
+  .showcase-photo-img,
+  .dialogue-character-img,
+  .tactical-photo-img {
+  height: 460px;
+  max-height: 90%;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
+}
+
+  .showcase-pedestal,
+  .tactical-pedestal {
+    width: 240px;
+  }
+
+  .showcase-name,
+  .tactical-title {
+    font-size: 1.6rem;
+  }
+
+  .game-telemetry-box {
+    max-width: 140px;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .game-speedo-val {
+    font-size: 1.7rem;
+  }
 }
 
 /* --- 5. ABOUT SECTION --- */

@@ -133,7 +133,7 @@
     </section>
 
     <!-- =========================================================================
-         3. CINEMATIC SCENE STUDIO (CSS-ONLY INTERACTIVE THEATER)
+         3. CINEMATIC SCENE STUDIO & ARCADE CAR GAME
          ========================================================================= -->
     <section id="studio" class="section-studio">
       <div class="section-container">
@@ -141,7 +141,7 @@
           <span class="section-label">Interactive Experience</span>
           <h2 class="section-title">Character Cinema Studio</h2>
           <p class="section-desc">
-            Explore talking sequences, highway cruising, walking transforms, and tactical stances powered strictly by HTML5 and CSS3 keyframes.
+            Cinematic Vice City character showcase, branching game dialogue, playable coastal highway drive, and tactical stance theater.
           </p>
         </div>
 
@@ -149,7 +149,7 @@
         <div class="tech-honesty-box">
           <div class="honesty-icon">ℹ</div>
           <div class="honesty-text">
-            <strong>Technical Honesty Architecture:</strong> CSS animates transforms, sprite sheets, layered mouth components, parallax backgrounds, and opacity. CSS cannot synthesize novel anatomical poses from a single photograph. This studio uses modular sprite-sheet components that support multi-frame sequences, falling back gracefully to translations and camera pans when single assets are present.
+            <strong>Technical Honesty Architecture:</strong> Scene 1 presents an interactive character photo showcase with 5 distinct Vice City environments and automatic rotation, preserving authentic photo proportions without fabricated body movements. Scene 2 features an interactive typewriter dialogue engine with branching portfolio topics. Scene 3 is a real-time playable Three.js 3D coastal driving arcade game with keyboard &amp; mobile touch controls. Scene 4 provides an expansive tactical rooftop stance with interactive camera framing presets.
           </div>
         </div>
 
@@ -157,158 +157,351 @@
         <input type="radio" name="scene-view" id="scene-toggle-idle" class="scene-radio" checked>
         <input type="radio" name="scene-view" id="scene-toggle-talk" class="scene-radio">
         <input type="radio" name="scene-view" id="scene-toggle-cruise" class="scene-radio">
-        <input type="radio" name="scene-view" id="scene-toggle-walk" class="scene-radio">
         <input type="radio" name="scene-view" id="scene-toggle-action" class="scene-radio">
 
         <!-- Scene Switcher Navigation Tabs -->
         <div class="scene-switcher">
-          <label for="scene-toggle-idle" class="scene-tab">1. Idle Sunset</label>
+          <label for="scene-toggle-idle" class="scene-tab">1. Character Showcase</label>
           <label for="scene-toggle-talk" class="scene-tab">2. Dialogue Scene</label>
-          <label for="scene-toggle-cruise" class="scene-tab">3. Vehicle Highway</label>
-          <label for="scene-toggle-walk" class="scene-tab">4. Motion &amp; Sprites</label>
-          <label for="scene-toggle-action" class="scene-tab">5. Tactical Stance</label>
+          <label for="scene-toggle-cruise" class="scene-tab">3. Coastal Drive (Game)</label>
+          <label for="scene-toggle-action" class="scene-tab">4. Tactical Stance</label>
         </div>
 
         <!-- Studio Stage Frame -->
-        <div class="studio-stage">
+        <div class="studio-stage" id="main-studio-stage">
 
-          <!-- SCENE 1: IDLE SUNSET STANCE -->
-          <article id="panel-idle" class="scene-panel">
-            <div class="idle-stage-content">
-              <div class="idle-info-card">
-                <span class="vc-pill highlight">Default Pose</span>
-                <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin: 0.5rem 0; font-style: italic; color: #fff;">
-                  Vice City Sunset Rest
-                </h3>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.6;">
-                  Nishant stands poised in his signature ivory jacket draped over shoulders with black shirt and light trousers. Subtle CSS keyframe breathing transforms simulate lifelike idle presence.
-                </p>
-                <div style="margin-top: 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-cyan);">
-                  CSS Animation: characterIdleBreathe (4.5s ease-in-out infinite)
+          <!-- SCENE 1: INTERACTIVE CHARACTER PHOTO SHOWCASE -->
+          <article id="panel-idle" class="scene-panel photo-showcase-panel env-sunset">
+            <!-- Background Layered Environments Container -->
+            <div class="showcase-bg-container" id="showcase-bg-container">
+              <!-- Sky Gradients (Active one is visible) -->
+              <div class="showcase-sky-layer env-sky-sunset active" data-env="sunset"></div>
+              <div class="showcase-sky-layer env-sky-neon" data-env="neon"></div>
+              <div class="showcase-sky-layer env-sky-boulevard" data-env="boulevard"></div>
+              <div class="showcase-sky-layer env-sky-oceanfront" data-env="oceanfront"></div>
+              <div class="showcase-sky-layer env-sky-day" data-env="day"></div>
+
+              <!-- Real Scenic Background Images for 5 Distinct Environments -->
+              <div class="showcase-scenery-layer scenery-sunset active" data-env="sunset"></div>
+              <div class="showcase-scenery-layer scenery-neon" data-env="neon"></div>
+              <div class="showcase-scenery-layer scenery-boulevard" data-env="boulevard"></div>
+              <div class="showcase-scenery-layer scenery-oceanfront" data-env="oceanfront"></div>
+              <div class="showcase-scenery-layer scenery-day" data-env="day"></div>
+
+              <!-- Foreground Framing Tropical Palms -->
+              <div class="showcase-framing-layer"></div>
+
+              <!-- Pointer-Responsive Ambient Lighting Sweep -->
+              <div class="showcase-light-sweep" id="showcase-light-sweep"></div>
+
+              <!-- Subtle Cinematic Vignette -->
+              <div class="showcase-vignette"></div>
+            </div>
+
+            <!-- Two-Column Desktop Layout Frame: Left Info, Right Character (No overlap!) -->
+            <div class="showcase-content-grid">
+              <!-- Column 1: Compact Dossier & Environment Carousel Controls -->
+              <div class="showcase-info-dossier">
+                <div class="showcase-badge-row">
+                  <span class="vc-pill highlight">Cinematic Showcase</span>
+                  <span class="showcase-env-badge" id="showcase-active-env-badge">Sunset Beach</span>
                 </div>
-              </div>
-
-              <div class="idle-character-slot">
-                <img src="assets/character/idle.webp" alt="Nishant Ekka Idle Stance" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
-              </div>
-            </div>
-          </article>
-
-          <!-- SCENE 2: TALKING CHARACTER & SUBTITLES -->
-          <article id="panel-talk" class="scene-panel">
-            <!-- Character in talking stance -->
-            <div class="talk-character-container">
-              <img src="assets/character/idle.webp" alt="Nishant Ekka Talking" class="talk-character-img" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
-              <!-- Animated mouth layer placeholder for multi-layer sprite assets -->
-              <div class="talk-mouth-layer" title="Layered mouth phoneme component"></div>
-            </div>
-
-            <!-- Dialogue Subtitle Panel -->
-            <div class="dialogue-box">
-              <div class="dialogue-speaker">
-                Nishant Ekka <span class="dialogue-badge">Subtitle HUD</span>
-              </div>
-
-              <div class="dialogue-line-container">
-                <div class="dialogue-line line-1">
-                  "Hey, I'm Nishant Ekka."
-                </div>
-                <div class="dialogue-line line-2">
-                  "Welcome to my world."
-                </div>
-                <div class="dialogue-line line-3">
-                  "I'm passionate about technology, creativity, and building things that matter."
-                </div>
-              </div>
-
-              <div class="dialogue-note">
-                ⚡ Sequenced via CSS @keyframes and staggered animation delays. (No fake audio claims).
-              </div>
-            </div>
-          </article>
-
-          <!-- SCENE 3: VEHICLE HIGHWAY SCENE -->
-          <article id="panel-cruise" class="scene-panel">
-            <!-- Parallax layers -->
-            <div class="cruise-skyline"></div>
-            <div class="cruise-road">
-              <div class="road-markings"></div>
-            </div>
-            <div class="streetlights-layer"></div>
-
-            <!-- Sports Car Entity -->
-            <div class="cruise-vehicle-wrapper">
-              <div class="headlight-beam"></div>
-              <img src="assets/character/vehicle.webp" alt="Vice City Retro Sports Car" class="cruise-vehicle-img" onerror="this.onerror=null; this.src='assets/vehicles/sports-car.png';">
-              <div class="vehicle-underglow"></div>
-            </div>
-
-            <!-- Cruise Telemetry HUD -->
-            <div class="cruise-hud-panel">
-              <div>CRUISE SPEED</div>
-              <div class="speedometer">128 MPH</div>
-              <div style="color: var(--hud-green); font-size: 0.7rem; margin-top: 2px;">TURBO CHARGED</div>
-              <a href="#projects" class="cruise-cta">Cruise to Projects &darr;</a>
-            </div>
-          </article>
-
-          <!-- SCENE 4: WALKING / RUNNING MOTION & SPRITE ENGINE -->
-          <article id="panel-walk" class="scene-panel">
-            <div class="motion-parallax-bg"></div>
-            <div class="motion-sidewalk"></div>
-
-            <!-- Character Camera Gliding Across Screen -->
-            <div class="motion-character-box">
-              <!-- Configured sprite-sheet component: switches to spriteCycle if multi-frame sheet is supplied, 
-                   otherwise uses singleImagePace bobbing animation -->
-              <div class="sprite-player single-image-fallback" title="Single image translational pace fallback">
-                <img src="assets/character/idle.webp" alt="Character Moving" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
-              </div>
-            </div>
-
-            <!-- Sprite Spec Documentation Card -->
-            <div class="motion-spec-card">
-              <div class="spec-title">CSS Sprite Engine Spec</div>
-              <p style="color: var(--text-dim); margin: 0.35rem 0 0.6rem; line-height: 1.4;">
-                Configured with <code>steps(var(--frame-count))</code>. When running/walking sprite sheets (e.g., <code>running.webp</code>) are supplied, frame sequencing activates. Currently displaying camera glide translation without faking natural limb strides.
-              </p>
-              <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--sunset-gold);">
-                Asset Status: Single Pose Present &bull; Multi-frame gait awaited
-              </div>
-            </div>
-          </article>
-
-          <!-- SCENE 5: FICTIONAL ACTION THEATER -->
-          <article id="panel-action" class="scene-panel">
-            <!-- Checkbox trigger for strike shake -->
-            <input type="checkbox" id="action-trigger" class="action-trigger-toggle">
-
-            <div class="action-arena" id="action-strike">
-              <!-- Muzzle flash effect -->
-              <div class="muzzle-flash-box">
-                <img src="assets/character/muzzle-flash.webp" alt="Muzzle Flash burst" onerror="this.onerror=null; this.src='assets/character/muzzle-flash.png';">
-              </div>
-
-              <!-- Fighter character stance -->
-              <div class="action-fighter-slot">
-                <img src="assets/character/idle.webp" alt="Tactical Stance" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
-              </div>
-
-              <!-- Tactical Dossier & Controls -->
-              <div class="action-tactical-dossier">
-                <div class="tactical-header">Tactical Encounter Mode</div>
-                <p style="color: var(--text-dim); line-height: 1.5; margin-bottom: 0.8rem;">
-                  Fictional, non-graphic video-game stylized encounter. Tests synchronized CSS camera shake, transform impulses, and instant muzzle flash starburst bursts.
+                <h3 class="showcase-name">Nishant Ekka</h3>
+                <div class="showcase-tagline">Vice City Character Edition</div>
+                <p class="showcase-desc">
+                  Sharp, naturally proportioned character presentation in a vibrant tropical atmosphere. Move your cursor to explore pointer parallax, or browse distinct Vice City environments below.
                 </p>
 
-                <div class="action-controls">
-                  <!-- Anchor target trigger for pure CSS shake -->
-                  <a href="#action-strike" class="action-fire-btn">Trigger Flash &amp; Shake</a>
-                  <a href="#studio" class="vc-btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Reset</a>
+                <!-- Environment Controls Cluster -->
+                <div class="showcase-env-controls">
+                  <div class="env-ctrl-header">
+                    <span class="env-ctrl-label">ENVIRONMENT CAROUSEL:</span>
+                    <span class="env-timer-indicator" id="env-timer-indicator">Auto (7.5s)</span>
+                  </div>
+
+                  <!-- Carousel Navigation Row -->
+                  <div class="env-carousel-nav">
+                    <button type="button" class="env-nav-btn env-nav-prev" id="env-btn-prev" title="Previous Environment" aria-label="Previous Environment">◀ Prev</button>
+                    <button type="button" class="env-nav-btn env-nav-auto active" id="env-btn-auto" title="Pause or Resume Auto Rotation" aria-label="Toggle Auto Rotation">⏸ Pause</button>
+                    <button type="button" class="env-nav-btn env-nav-next" id="env-btn-next" title="Next Environment" aria-label="Next Environment">Next ▶</button>
+                    <button type="button" class="env-nav-btn env-nav-reset" id="env-btn-reset" title="Reset View and Parallax" aria-label="Reset View">↺ Reset</button>
+                  </div>
+
+                  <!-- 5 Environment Direct Selector Pills -->
+                  <div class="env-pills-row" id="env-pills-row">
+                    <button type="button" class="env-pill-btn active" data-env="sunset" title="Tropical Sunset Beach">🌅 Sunset Beach</button>
+                    <button type="button" class="env-pill-btn" data-env="neon" title="Neon Downtown">🌃 Neon Downtown</button>
+                    <button type="button" class="env-pill-btn" data-env="boulevard" title="Palm Boulevard">🌴 Palm Boulevard</button>
+                    <button type="button" class="env-pill-btn" data-env="oceanfront" title="Oceanfront Night">🌊 Oceanfront Night</button>
+                    <button type="button" class="env-pill-btn" data-env="day" title="Bright Tropical Day">☀️ Tropical Day</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 2: Unobstructed Character Stage Frame -->
+              <div class="showcase-character-column">
+                <div class="showcase-character-rig" id="showcase-character-rig">
+                  <!-- Ground Pedestal / Reflective Platform with Floor Shadow -->
+                  <div class="showcase-pedestal">
+                    <div class="pedestal-shadow"></div>
+                    <div class="pedestal-reflection"></div>
+                    <div class="pedestal-rim"></div>
+                  </div>
+
+                  <!-- Naturally Proportioned Character Photo -->
+                  <div class="showcase-photo-frame">
+                    <picture>
+                      <source srcset="assets/character/idle.webp" type="image/webp">
+                      <source srcset="assets/character/idle.png" type="image/png">
+                      <img src="assets/character/reference.jpg" alt="Nishant Ekka - Character Showcase" class="showcase-photo-img" id="showcase-photo-img">
+                    </picture>
+                    <div class="showcase-photo-glow"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 2: TALKING CHARACTER & BRANCHING DIALOGUE ENGINE -->
+          <article id="panel-talk" class="scene-panel dialogue-scene-panel">
+            <!-- Background: Tropical Penthouse Lounge at Dusk -->
+            <div class="dialogue-bg-stage">
+              <div class="dialogue-bg-sky"></div>
+              <div class="dialogue-bg-skyline"></div>
+              <div class="dialogue-bg-terrace"></div>
+              <div class="dialogue-ambient-light"></div>
+            </div>
+
+            <div class="dialogue-layout-grid">
+              <!-- Left Column: Compact Branching Dialogue Terminal -->
+              <div class="dialogue-terminal-panel">
+                <div class="dialogue-header-bar">
+                  <div class="dialogue-speaker-tag">
+                    <span class="speaker-icon">🎙️</span>
+                    <span class="speaker-name">NISHANT EKKA</span>
+                    <span class="speaker-status-pill" id="dialogue-status-pill">TRANSMITTING</span>
+                  </div>
+                  <div class="dialogue-progress" id="dialogue-progress">1 / 3</div>
                 </div>
 
-                <div style="margin-top: 0.8rem; font-family: var(--font-mono); font-size: 0.7rem; color: var(--sunset-gold);">
-                  Zero violence or graphic injury &bull; Pure stylistic effect testing
+                <!-- Text Display Box with Typewriter Effect -->
+                <div class="dialogue-text-viewport" id="dialogue-text-viewport" role="region" aria-live="polite">
+                  <p class="dialogue-text-content" id="dialogue-text-content">
+                    "Hey, I'm Nishant Ekka. Welcome to my world."
+                  </p>
+                  <span class="dialogue-cursor" id="dialogue-cursor">▋</span>
+                </div>
+
+                <!-- Branching Choice Buttons Cluster -->
+                <div class="dialogue-choices-cluster" id="dialogue-choices-cluster" style="display: none;">
+                  <div class="choices-prompt-label">SELECT A TOPIC TO EXPLORE:</div>
+                  <div class="choices-btn-group">
+                    <button type="button" class="dialogue-choice-btn" data-topic="software">
+                      <span class="choice-num">[1]</span>
+                      <span class="choice-text">💻 Full-Stack Architecture &amp; Systems</span>
+                    </button>
+                    <button type="button" class="dialogue-choice-btn" data-topic="robotics">
+                      <span class="choice-num">[2]</span>
+                      <span class="choice-text">🤖 Robotics, IoT &amp; Embedded Hardware</span>
+                    </button>
+                    <button type="button" class="dialogue-choice-btn" data-topic="creative">
+                      <span class="choice-num">[3]</span>
+                      <span class="choice-text">🎨 Creative 3D WebGL &amp; User Experience</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Dialogue Navigation Controls Bar -->
+                <div class="dialogue-action-bar">
+                  <button type="button" class="dialogue-btn dialogue-btn-continue" id="dialogue-btn-continue" title="Advance to next line (or click while typing to skip)">
+                    <span class="btn-text" id="dialogue-btn-label">Continue ▶</span>
+                  </button>
+                  <button type="button" class="dialogue-btn dialogue-btn-topics" id="dialogue-btn-topics" title="View Portfolio Discussion Topics">
+                    Portfolio Topics 💬
+                  </button>
+                  <button type="button" class="dialogue-btn dialogue-btn-restart" id="dialogue-btn-restart" title="Restart conversation from the beginning">
+                    ↺ Restart
+                  </button>
+                </div>
+
+                <div class="dialogue-hint-footer">
+                  <span>💡 Tip: Click the text box or press Space/Enter to advance or skip typing.</span>
+                </div>
+              </div>
+
+              <!-- Right Column: Character Portrait Frame (Never overlapped!) -->
+              <div class="dialogue-character-column">
+                <div class="dialogue-character-frame">
+                  <img src="assets/character/idle.webp" alt="Nishant Ekka Speaking" class="dialogue-character-img" onerror="this.onerror=null; this.src='assets/character/reference.jpg';">
+                  <div class="dialogue-photo-rim-glow"></div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 3: TROPICAL COASTAL ARCADE CAR-DRIVING MINI-GAME -->
+          <article id="panel-cruise" class="scene-panel arcade-game-panel">
+            <!-- Three.js Real-time 3D Game Canvas Viewport -->
+            <div id="three-game-viewport" class="three-game-viewport"></div>
+
+            <!-- Arcade Driving Game HUD Overlay -->
+            <div class="game-hud-overlay">
+              <!-- Top Toolbar: Telemetry, Environment Mode Selector, and Game Actions -->
+              <div class="game-hud-top-bar">
+                <!-- Top Left: Digital Speedometer & Distance -->
+                <div class="game-telemetry-box">
+                  <div class="game-speedo-row">
+                    <span class="game-speedo-val">0</span>
+                    <span class="game-speedo-unit">MPH</span>
+                  </div>
+                  <div class="game-rev-bar">
+                    <div class="game-rev-fill"></div>
+                  </div>
+                  <div class="game-distance-row">
+                    <span>ODOMETER:</span>
+                    <strong class="game-distance-val">0.0 MI</strong>
+                  </div>
+                </div>
+
+                <!-- Top Center: Day/Night Environment Mode Selector Toolbar -->
+                <div class="game-env-selector">
+                  <div class="game-env-status-pill">[AUTO: SUNSET]</div>
+                  <div class="game-env-btn-group">
+                    <button type="button" class="game-env-btn" data-gamemode="day">Day</button>
+                    <button type="button" class="game-env-btn active" data-gamemode="sunset">Sunset</button>
+                    <button type="button" class="game-env-btn" data-gamemode="night">Night</button>
+                    <button type="button" class="game-env-btn" data-gamemode="auto">Auto</button>
+                  </div>
+                </div>
+
+                <!-- Top Right: Game Action Buttons -->
+                <div class="game-actions-cluster">
+                  <button type="button" class="game-hud-btn game-btn-pause" title="Pause or resume driving">⏸ PAUSE</button>
+                  <button type="button" class="game-hud-btn game-btn-reset" title="Reset vehicle to center of road">↺ RESET</button>
+                  <button type="button" class="game-hud-btn game-btn-cam" title="Toggle camera perspective">📷 CAM</button>
+                </div>
+              </div>
+
+              <!-- Bottom Center: Desktop Keyboard Driving Hints -->
+              <div class="game-desktop-hints">
+                <span class="hint-badge">W / ▲</span> ACCEL &nbsp;&bull;&nbsp;
+                <span class="hint-badge">S / ▼</span> BRAKE/REV &nbsp;&bull;&nbsp;
+                <span class="hint-badge">A / ◀</span> STEER L &nbsp;&bull;&nbsp;
+                <span class="hint-badge">D / ▶</span> STEER R &nbsp;&bull;&nbsp;
+                <span class="hint-badge">SPACE</span> HANDBRAKE
+              </div>
+
+              <!-- Mobile Touch Driving Controls -->
+              <div class="game-touch-controls">
+                <div class="touch-cluster-left">
+                  <button type="button" class="touch-btn touch-btn-left" aria-label="Steer Left">◀ STEER</button>
+                  <button type="button" class="touch-btn touch-btn-right" aria-label="Steer Right">STEER ▶</button>
+                </div>
+                <div class="touch-cluster-right">
+                  <button type="button" class="touch-btn touch-btn-brake" aria-label="Brake and Reverse">▼ BRAKE</button>
+                  <button type="button" class="touch-btn touch-btn-gas" aria-label="Accelerate">▲ GAS</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SCENE 4: TACTICAL STANCE & ROOFTOP VISTA -->
+          <article id="panel-action" class="scene-panel tactical-scene-panel cam-preset-front">
+            <!-- Background: Tropical Penthouse Rooftop Vista -->
+            <div class="tactical-bg-stage" id="tactical-bg-stage">
+              <div class="tactical-bg-sky"></div>
+              <div class="tactical-bg-skyline"></div>
+              <div class="tactical-bg-rooftop"></div>
+              <div class="tactical-ambient-neon"></div>
+              <div class="tactical-vignette"></div>
+            </div>
+
+            <!-- Muzzle flash effect for combat readiness test -->
+            <div class="tactical-muzzle-flash" id="tactical-muzzle-flash">
+              <img src="assets/character/muzzle-flash.webp" alt="Muzzle Flash burst" onerror="this.onerror=null; this.src='assets/character/muzzle-flash.png';">
+            </div>
+
+            <!-- Two-Column Layout Frame -->
+            <div class="tactical-layout-grid" id="tactical-layout-grid">
+              <!-- Left Column: Tactical Dossier & Camera Presets -->
+              <div class="tactical-dossier-panel">
+                <div class="tactical-badge-row">
+                  <span class="vc-pill highlight">Tactical Stance</span>
+                  <span class="tactical-status-indicator">STATUS: COMBAT READY</span>
+                </div>
+
+                <h3 class="tactical-title">NISHANT EKKA</h3>
+                <div class="tactical-role">Full-Stack Architect &bull; Creative Technologist</div>
+
+                <!-- Tactical Stats Grid -->
+                <div class="tactical-stats-grid">
+                  <div class="tactical-stat-item">
+                    <span class="stat-label">DISCIPLINE:</span>
+                    <strong class="stat-value">System Engineering</strong>
+                  </div>
+                  <div class="tactical-stat-item">
+                    <span class="stat-label">PRIMARY WEAPON:</span>
+                    <strong class="stat-value">TypeScript / Python</strong>
+                  </div>
+                  <div class="tactical-stat-item">
+                    <span class="stat-label">SPECIALTY:</span>
+                    <strong class="stat-value">3D WebGL / IoT Systems</strong>
+                  </div>
+                  <div class="tactical-stat-item">
+                    <span class="stat-label">MISSION STATUS:</span>
+                    <strong class="stat-value text-gold">Ready for Hire</strong>
+                  </div>
+                </div>
+
+                <!-- Camera Preset Controls -->
+                <div class="tactical-cam-controls">
+                  <div class="tactical-ctrl-label">CINEMATIC CAMERA PRESETS:</div>
+                  <div class="tactical-cam-btn-group">
+                    <button type="button" class="tactical-cam-btn active" data-preset="front" title="Full-body straight-on framing">
+                      🎯 FRONT
+                    </button>
+                    <button type="button" class="tactical-cam-btn" data-preset="portrait" title="Closer framing focusing on face &amp; outfit">
+                      👤 PORTRAIT
+                    </button>
+                    <button type="button" class="tactical-cam-btn" data-preset="wide" title="Wide-angle view showcasing rooftop skyline">
+                      🌆 WIDE SCENE
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Tactical Action Trigger Controls -->
+                <div class="tactical-actions-row">
+                  <button type="button" class="action-strike-btn" id="tactical-strike-btn" title="Trigger synchronized strike and cinematic screen shake">
+                    ⚡ Trigger Strike &amp; Shake
+                  </button>
+                  <button type="button" class="tactical-reset-btn" id="tactical-reset-btn" title="Reset camera framing and effects">
+                    ↺ Reset Cam
+                  </button>
+                </div>
+
+                <div class="tactical-note">
+                  ⚡ Fictional video-game stylized encounter &bull; Real-time CSS transforms &amp; camera framing presets.
+                </div>
+              </div>
+
+              <!-- Right Column: Character Fighter Framing -->
+              <div class="tactical-character-column">
+                <div class="tactical-character-rig" id="tactical-character-rig">
+                  <!-- Ground Pedestal / Rooftop Shadow -->
+                  <div class="tactical-pedestal">
+                    <div class="tactical-shadow"></div>
+                    <div class="tactical-rim"></div>
+                  </div>
+
+                  <!-- Character Full-Body Photo Frame -->
+                  <div class="tactical-photo-frame">
+                    <picture>
+                      <source srcset="assets/character/idle.webp" type="image/webp">
+                      <source srcset="assets/character/idle.png" type="image/png">
+                      <img src="assets/character/reference.jpg" alt="Nishant Ekka - Tactical Stance" class="tactical-photo-img" id="tactical-photo-img">
+                    </picture>
+                    <div class="tactical-photo-glow"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -334,7 +527,7 @@
             <div class="about-dossier-meta">
               <div><strong>NAME:</strong> Nishant Ekka</div>
               <div><strong>AFFILIATION:</strong> Computer Science &bull; Tech Innovator</div>
-              <div><strong>SIGNATURE:</strong> Ivory Suit &bull; Dark Curly Hair</div>
+              <div><strong>SIGNATURE:</strong> Black Shirt &bull; White Trousers &bull; Dark Curly Hair</div>
               <div><strong>BASE OF OPS:</strong> Portfolio Workspace</div>
             </div>
           </div>
@@ -905,6 +1098,10 @@
       &copy; Nishant Ekka. Handcrafted with semantic HTML5 &amp; CSS3. No JavaScript used.
     </div>
   </footer>
+
+  <!-- Three.js 3D Game Engine & Studio Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/vice-city-engine.js"></script>
 
 </body>
 </html>
