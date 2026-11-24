@@ -98,7 +98,9 @@ Where the original lesson already met the baseline requirements, the contributio
 
 ### Achievements and project milestones
 
-- **WorldQuant BRAIN Challenge — Bronze, Silver and Gold:** Challenge certificate levels reported by the student. The individual issue dates and public credential URLs have not been supplied, so they are not represented as independently verified credentials. [Official WorldQuant BRAIN platform](https://brain.worldquant.com/).
+- **WorldQuant Challenge — Bronze Level:** Certificate of Accomplishment awarded to Nishant Ekka and presented by Nitish Maini, Chief Strategy Officer of WorldQuant. The supplied certificate does not show an issue date or individual credential URL. [WorldQuant BRAIN official platform](https://brain.worldquant.com/).
+- **WorldQuant Challenge — Silver Level:** Certificate of Accomplishment awarded to Nishant Ekka and presented by Nitish Maini, Chief Strategy Officer of WorldQuant. The supplied certificate does not show an issue date or individual credential URL. [WorldQuant BRAIN official platform](https://brain.worldquant.com/).
+- **WorldQuant Challenge — Gold Level:** Certificate of Accomplishment awarded to Nishant Ekka and presented by Nitish Maini, Chief Strategy Officer of WorldQuant. The supplied certificate does not show an issue date or individual credential URL. [WorldQuant BRAIN official platform](https://brain.worldquant.com/).
 - **VoiceKhata Hackday — October 2026:** Collaborative development of a voice-first digital ledger prototype for small vendors. [Repository and project documentation](https://github.com/nishantekka2007-sys/voicekhata-hackday).
 - **S&AI Open-Source Coursework — 2026:** Ten task-specific submissions, R18-T041 through R18-T050, with direct PR evidence in Section 3. These PRs are open submissions, not merged contributions. [Author-filtered PR activity](https://github.com/S-AI-Projects/learning-area/pulls?q=is%3Apr+author%3Anishantekka2007-sys).
 - **minigit — 2026:** Python project exploring Git's object model, content addressing, commits, trees, staging, and refs. [Repository](https://github.com/nishantekka2007-sys/minigit).
