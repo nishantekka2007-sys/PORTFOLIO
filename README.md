@@ -1,76 +1,67 @@
-# Nishant Ekka | Interactive Portfolio
+# Nishant Ekka — Professional Portfolio
 
-A neon-inspired, Vice City-style portfolio showcasing my projects, technical interests, and interactive web experiments.
+A personal and academic portfolio documenting my education, technical interests, software projects, and open-source contributions.
 
-<p align="center">
-  <a href="https://nishant-portfolio-psi-livid.vercel.app/"><strong>🌐 Live Portfolio</strong></a>
-  &nbsp; · &nbsp;
-  <a href="https://github.com/nishantekka2007-sys/PORTFOLIO"><strong>💻 Source Code</strong></a>
-  &nbsp; · &nbsp;
-  <a href="https://github.com/nishantekka2007-sys"><strong>👤 GitHub</strong></a>
-  &nbsp; · &nbsp;
-  <a href="https://www.linkedin.com/in/nishant-ekka-375220429/"><strong>🔗 LinkedIn</strong></a>
-  &nbsp; · &nbsp;
-  <a href="mailto:nishantekka2007@gmail.com"><strong>✉️ Email</strong></a>
-</p>
+**Live portfolio:** https://nishant-portfolio-psi-livid.vercel.app/  
+**Source repository:** https://github.com/nishantekka2007-sys/PORTFOLIO
 
----
+## Profile
 
-## ✨ Highlights
+I am a first-year B.Tech student in Computer Science and Engineering, specializing in Artificial Intelligence and Machine Learning at Newton School of Technology. My current areas of interest include software engineering, applied AI/ML, Python development, backend systems, cybersecurity, and robotics. I use practical projects and open-source tasks to strengthen my engineering fundamentals.
 
-- **Interactive portfolio** — About, Arsenal, Missions, Journey, Passions, and Radio sections.
-- **Character Studio** — a character-focused visual showcase.
-- **Driving game** — a Traffic Racer-style experience with traffic, collisions, and keyboard controls.
-- **Dialogue Scene** — a chat-style portfolio assistant interface.
-- **Neon-inspired design** — dark surfaces, pink and cyan accents, and responsive layouts.
+## Portfolio sections
 
-## 🧰 Technologies
+- **About:** Academic background, technical direction, and professional objectives.
+- **Skills:** Programming languages, development tools, and technical domains.
+- **Projects:** Project context, implementation approach, technology stack, and repository links.
+- **S&AI open-source contributions:** Task IDs, implementation summaries, technical rationale, and direct pull-request links.
+- **Education and achievements:** Academic progression and WorldQuant Challenge certificate milestones.
+- **Interests:** Football, basketball, photography, videography, and other creative and technical interests.
+- **Contact:** Professional email, GitHub, and LinkedIn.
 
-- **HTML5** — page structure
-- **CSS3** — layout, responsive styling, and visual effects
-- **JavaScript** — interactive behaviour and game logic
-- **Java** — programming language
-- **Three.js / WebGL** — 3D graphics used in the driving experience
+## Selected projects
 
-## 🚀 Run Locally
+### VoiceKhata
+A voice-first digital ledger concept intended to help micro-vendors record transactions through natural speech. The project uses a Python/FastAPI backend and a persistent data layer.
 
-**Requirements:** Python 3 or Node.js.
+Repository: https://github.com/nishantekka2007-sys/voicekhata-hackday
+
+### PHOTON
+A privacy-focused photo and video platform exploring media organization and user-controlled workflows.
+
+Repository: https://github.com/nishantekka2007-sys/PHOTON
+
+### Token Studio
+An interactive LLM/tokenization learning and exploration project.
+
+Repository: https://github.com/nishantekka2007-sys/Token-studio
+
+## S&AI open-source work
+
+Contributions are submitted to the S&AI-Projects learning-area repository. The portfolio links to the task-specific pull requests and summarizes the browser testing, accessibility, responsive behaviour, fallback handling, and documentation work.
+
+Repository: https://github.com/S-AI-Projects/learning-area
+
+## Technologies represented
+
+HTML5, CSS3, JavaScript, Python, FastAPI, SQLite, Playwright, Git, GitHub, and Three.js/WebGL. Specific technologies are associated with the projects and contributions where they were used.
+
+## Contact
+
+- **Email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
+- **GitHub:** https://github.com/nishantekka2007-sys
+- **LinkedIn:** https://www.linkedin.com/in/nishant-ekka-375220429/
+
+## Run locally
+
+This portfolio is a static website. From the repository directory, run:
 
 ```bash
-git clone https://github.com/nishantekka2007-sys/PORTFOLIO.git
-cd PORTFOLIO
 python3 -m http.server 8000
 ```
 
-Open [http://localhost:8000](http://localhost:8000) in your browser. Stop the server with `Ctrl+C`.
+Then open http://localhost:8000 in a browser.
 
-Alternatively, if Node.js is installed:
+---
 
-```bash
-npx serve .
-```
-
-## 🎮 Driving Game Controls
-
-| Action | Control |
-|---|---|
-| Accelerate | `W` or `↑` |
-| Brake | `S` or `↓` |
-| Steer left | `A` or `←` |
-| Steer right | `D` or `→` |
-| Handbrake | `Space` |
-| Pause | `Esc` |
-| Reset | `R` |
-
-Touch controls may be available on supported mobile layouts.
-
-## 📬 Contact
-
-- **Email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
-- **LinkedIn:** [linkedin.com/in/nishant-ekka-375220429](https://www.linkedin.com/in/nishant-ekka-375220429/)
-- **GitHub:** [nishantekka2007-sys](https://github.com/nishantekka2007-sys)
-- **Portfolio:** [nishant-portfolio-psi-livid.vercel.app](https://nishant-portfolio-psi-livid.vercel.app/)
-
-## 📄 License
-
-No license is currently specified. Please contact the author before reusing or redistributing this project's code or assets.
+© Nishant Ekka.
