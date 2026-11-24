@@ -88,11 +88,21 @@ Where the original lesson already met the baseline requirements, the contributio
 
 ## 5. Education and achievements
 
-- **B.Tech, Computer Science and Engineering — Artificial Intelligence and Machine Learning**, Newton School of Technology. First year, 2026; expected graduation 2030 (subject to the official academic schedule).
-- **ISC Class 12 — Computer Science**, completed 2025.
-- **WorldQuant Challenge:** Bronze, Silver, and Gold level certificates. The individual certificate dates and credential URLs should be checked against the original certificates.
-- **VoiceKhata Hackday:** collaborative project, October 2026. Evidence: project repository and documentation linked above.
-- **S&AI Open-Source Project:** ten task-specific pull requests in 2026. Evidence: direct PR links in Section 3.
+### Education
+
+- **B.Tech — Computer Science and Engineering (Artificial Intelligence & Machine Learning)**  
+  Newton School of Technology · First year in 2026 · Undergraduate study ongoing.  
+  **Expected completion:** 2030, estimated from a four-year programme beginning in 2026; confirm the official graduation date with the institution.
+- **ISC Class XII — Computer Science**  
+  Completed in 2025.
+
+### Achievements and project milestones
+
+- **WorldQuant BRAIN Challenge — Bronze, Silver and Gold:** Challenge certificate levels reported by the student. The individual issue dates and public credential URLs have not been supplied, so they are not represented as independently verified credentials. [Official WorldQuant BRAIN platform](https://brain.worldquant.com/).
+- **VoiceKhata Hackday — October 2026:** Collaborative development of a voice-first digital ledger prototype for small vendors. [Repository and project documentation](https://github.com/nishantekka2007-sys/voicekhata-hackday).
+- **S&AI Open-Source Coursework — 2026:** Ten task-specific submissions, R18-T041 through R18-T050, with direct PR evidence in Section 3. These PRs are open submissions, not merged contributions. [Author-filtered PR activity](https://github.com/S-AI-Projects/learning-area/pulls?q=is%3Apr+author%3Anishantekka2007-sys).
+- **minigit — 2026:** Python project exploring Git's object model, content addressing, commits, trees, staging, and refs. [Repository](https://github.com/nishantekka2007-sys/minigit).
+- **Selected software projects — 2026:** Project work spanning PHOTON, LLM Pipeline Explorer, MONOLITH, and Campus Knowledge Hub. See Section 4 for problem statements, implementation details, technologies, roles, and repositories.
 
 ## 6. Contact
 
