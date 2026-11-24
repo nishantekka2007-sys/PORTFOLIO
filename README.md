@@ -1,67 +1,105 @@
-# Nishant Ekka — Professional Portfolio
-
-A personal and academic portfolio documenting my education, technical interests, software projects, and open-source contributions.
+# Nishant Ekka — Academic & Software Engineering Portfolio
 
 **Live portfolio:** https://nishant-portfolio-psi-livid.vercel.app/  
-**Source repository:** https://github.com/nishantekka2007-sys/PORTFOLIO
+**Portfolio source:** https://github.com/nishantekka2007-sys/PORTFOLIO
 
-## Profile
+This portfolio presents my academic background, demonstrated technical skills, selected software projects, and task-based contributions to the Newton School of Technology S&AI open-source programme.
 
-I am a first-year B.Tech student in Computer Science and Engineering, specializing in Artificial Intelligence and Machine Learning at Newton School of Technology. My current areas of interest include software engineering, applied AI/ML, Python development, backend systems, cybersecurity, and robotics. I use practical projects and open-source tasks to strengthen my engineering fundamentals.
+## 1. About me
 
-## Portfolio sections
+I am a first-year B.Tech student in Computer Science and Engineering (Artificial Intelligence and Machine Learning) at Newton School of Technology. My work focuses on programming, web and backend application development, software testing, and practical exploration of AI and quantitative research. I have built and documented projects including VoiceKhata, PHOTON, MONOLITH, and LLM Pipeline Explorer, and submitted task-based pull requests to the S&AI-Projects learning-area repository. I am working towards software engineering and applied AI opportunities and future internships.
 
-- **About:** Academic background, technical direction, and professional objectives.
-- **Skills:** Programming languages, development tools, and technical domains.
-- **Projects:** Project context, implementation approach, technology stack, and repository links.
-- **S&AI open-source contributions:** Task IDs, implementation summaries, technical rationale, and direct pull-request links.
-- **Education and achievements:** Academic progression and WorldQuant Challenge certificate milestones.
-- **Interests:** Football, basketball, photography, videography, and other creative and technical interests.
-- **Contact:** Professional email, GitHub, and LinkedIn.
+## 2. Skills with evidence
 
-## Selected projects
+Skills are linked in the portfolio to repositories or task pull requests that demonstrate related implementation work.
 
-### VoiceKhata
-A voice-first digital ledger concept intended to help micro-vendors record transactions through natural speech. The project uses a Python/FastAPI backend and a persistent data layer.
+- **Programming:** Python, Java, JavaScript, TypeScript, HTML, CSS, SQL.
+- **Web and backend:** Next.js, React, FastAPI, REST APIs, SQLite, Supabase, Vercel.
+- **Testing and engineering workflow:** Playwright, browser regression testing, accessibility checks, Git, GitHub, Python testing.
+- **AI and data exploration:** Whisper-based speech workflow, LLM tokenization concepts, WorldQuant BRAIN alpha research.
+- **Creative and collaboration:** Photography and team-based hackathon development.
 
-Repository: https://github.com/nishantekka2007-sys/voicekhata-hackday
+## 3. S&AI open-source contributions
 
-### PHOTON
-A privacy-focused photo and video platform exploring media organization and user-controlled workflows.
+**Course repository:** https://github.com/S-AI-Projects/learning-area  
+**My PR activity:** https://github.com/S-AI-Projects/learning-area/pulls?q=is%3Apr+author%3Anishantekka2007-sys
 
-Repository: https://github.com/nishantekka2007-sys/PHOTON
+| Task ID | PR | Contribution |
+| --- | ---: | --- |
+| R18-T050 | [#72](https://github.com/S-AI-Projects/learning-area/pull/72) | Playwright regression coverage for responsive radio form layout and keyboard/mouse interaction. |
+| R18-T049 | [#71](https://github.com/S-AI-Projects/learning-area/pull/71) | OOJS lesson content, documentation-link, style, and broken-link regression checks. |
+| R18-T048 | [#70](https://github.com/S-AI-Projects/learning-area/pull/70) | Keyboard focus visibility, reduced-motion checks, and responsive layout verification. |
+| R18-T047 | [#69](https://github.com/S-AI-Projects/learning-area/pull/69) | Security regression checks ensuring HTML-like input remains literal text and cannot inject markup or execute handlers. |
+| R18-T046 | [#68](https://github.com/S-AI-Projects/learning-area/pull/68) | Bouncing-balls walkthrough and browser checks for canvas dimensions, animation, and runtime errors. |
+| R18-T045 | [#67](https://github.com/S-AI-Projects/learning-area/pull/67) | Canvas 2D unsupported-context fallback and tests for supported/unsupported environments. |
+| R18-T044 | [#66](https://github.com/S-AI-Projects/learning-area/pull/66) | Deterministic browser regression checks for content, DOM structure, layout, and browser errors. |
+| R18-T043 | [#65](https://github.com/S-AI-Projects/learning-area/pull/65) | Repeat-initialization test harness covering duplicate DOM, handlers, timers, style toggles, and cleanup. |
+| R18-T042 | [#64](https://github.com/S-AI-Projects/learning-area/pull/64) | Responsive image source, viewport layout, missing-image/404, alt-text, and recovery tests. Replacement for closed PR #62. |
+| R18-T041 | [#63](https://github.com/S-AI-Projects/learning-area/pull/63) | Keyboard accessibility checks for Tab focus, Space-key video playback/pause, native controls, and metadata. Replacement for closed PR #61. |
 
-### Token Studio
-An interactive LLM/tokenization learning and exploration project.
+Where the original lesson already met the baseline requirements, the contribution adds regression coverage and evidence rather than changing correct lesson code unnecessarily. PRs #61 and #62 were superseded by #63 and #64 respectively and are not counted as separate tasks.
 
-Repository: https://github.com/nishantekka2007-sys/Token-studio
+## 4. Selected projects
 
-## S&AI open-source work
+### VoiceKhata — voice-first digital ledger
+**Problem:** Small vendors need a quick way to record credit, repayments, and expenses without repeated manual typing.  
+**Solution:** A multilingual voice-entry workflow transcribes speech, lets the vendor review parsed transaction details, and stores ledger entries. The browser demo stores data locally; an optional FastAPI backend and SQLite database support persistent, account-based storage.  
+**My contribution:** Collaborative hackathon development of the product workflow and application implementation.  
+**Stack:** Python, FastAPI, SQLite, Whisper speech processing, HTML, CSS, JavaScript.  
+**Repository:** https://github.com/nishantekka2007-sys/voicekhata-hackday  
+**Demo:** https://nishantekka2007-sys.github.io/voicekhata-hackday/
 
-Contributions are submitted to the S&AI-Projects learning-area repository. The portfolio links to the task-specific pull requests and summarizes the browser testing, accessibility, responsive behaviour, fallback handling, and documentation work.
+### PHOTON — personal photo and video workspace
+**Problem:** Personal media libraries need an organized way to browse, curate, and understand photos and videos.  
+**Solution:** A web workspace developed around a media library, collections, metadata exploration, duplicate review, and spatial organization, with local persistence and optional Supabase services.  
+**My contribution:** Application interface and media-workspace development.  
+**Stack:** Next.js 14, React, TypeScript, Tailwind CSS, Framer Motion, Supabase, Vercel.  
+**Repository:** https://github.com/nishantekka2007-sys/PHOTON  
+**Live application:** https://photon-bn7e25qjz-nishantekka2007-6282.vercel.app
 
-Repository: https://github.com/S-AI-Projects/learning-area
+### LLM Pipeline Explorer
+**Problem:** Tokenization and vector representation concepts are difficult to understand from text alone.  
+**Solution:** A browser-based educational tool for vocabulary building, token inspection, token statistics, and interactive 3D-style sentence-vector exploration. It uses simplified demonstration calculations, not a trained production model.  
+**My contribution:** Client-side interactions, calculations, and visualization.  
+**Stack:** HTML5, CSS3, Vanilla JavaScript, Canvas API.  
+**Repository:** https://github.com/nishantekka2007-sys/LLM-AI  
+**Demo:** https://llm-pipeline-explorer-clean.vercel.app/
 
-## Technologies represented
+### MONOLITH — browser-based LLM playground
+**Problem:** Developers need an accessible interface to experiment with prompts, models, and generation settings.  
+**Solution:** A multi-message chat workspace with model selection, streaming controls, prompt templates, import/export, and user-supplied Groq API credentials handled through a serverless proxy.  
+**My contribution:** Playground workflow and browser interface integration.  
+**Stack:** HTML, CSS, JavaScript, Vercel Serverless Functions, Groq API.  
+**Repository:** https://github.com/nishantekka2007-sys/MONOLITH
 
-HTML5, CSS3, JavaScript, Python, FastAPI, SQLite, Playwright, Git, GitHub, and Three.js/WebGL. Specific technologies are associated with the projects and contributions where they were used.
+### minigit — Git internals implementation
+**Problem:** Git's internal object model is hidden behind everyday commands.  
+**Solution:** A small Python implementation of Git concepts including SHA-1 content addressing, blobs, trees, commits, staging, and refs, writing Git-compatible objects.  
+**My contribution:** Command-oriented implementation and testing.  
+**Stack:** Python, SHA-1, pytest, Git object model.  
+**Repository:** https://github.com/nishantekka2007-sys/minigit
 
-## Contact
+### Campus Knowledge Hub
+**Problem:** Students need a central place to add, search, filter, and bookmark learning resources.  
+**Solution:** A responsive resource manager backed by a REST API and SQLite, with CRUD operations, search, filters, and automated tests.  
+**My contribution:** Resource-management interface and API/database workflow.  
+**Stack:** Python, FastAPI, SQLite, Jinja2, HTML, CSS, JavaScript, pytest.  
+**Repository:** https://github.com/nishantekka2007-sys/campus-knowledge-hub
 
-- **Email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
+## 5. Education and achievements
+
+- **B.Tech, Computer Science and Engineering — Artificial Intelligence and Machine Learning**, Newton School of Technology. First year, 2026; expected graduation 2030 (subject to the official academic schedule).
+- **ISC Class 12 — Computer Science**, completed 2025.
+- **WorldQuant Challenge:** Bronze, Silver, and Gold level certificates. The individual certificate dates and credential URLs should be checked against the original certificates.
+- **VoiceKhata Hackday:** collaborative project, October 2026. Evidence: project repository and documentation linked above.
+- **S&AI Open-Source Project:** ten task-specific pull requests in 2026. Evidence: direct PR links in Section 3.
+
+## 6. Contact
+
+- **Professional email:** [nishantekka2007@gmail.com](mailto:nishantekka2007@gmail.com)
 - **GitHub:** https://github.com/nishantekka2007-sys
 - **LinkedIn:** https://www.linkedin.com/in/nishant-ekka-375220429/
 
-## Run locally
-
-This portfolio is a static website. From the repository directory, run:
-
-```bash
-python3 -m http.server 8000
-```
-
-Then open http://localhost:8000 in a browser.
-
 ---
 
-© Nishant Ekka.
+© Nishant Ekka. All project and contribution descriptions are intended to reflect the linked repositories and pull-request records.
