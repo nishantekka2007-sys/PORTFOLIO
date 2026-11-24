@@ -1,6 +1,6 @@
 # Nishant Ekka — Academic & Software Engineering Portfolio
 
-**Live portfolio:** https://nishant-portfolio-psi-livid.vercel.app/  
+**Live portfolio:** https://nishant-portfolio-git-main-nishantekka2007-6282.vercel.app/  
 **Portfolio source:** https://github.com/nishantekka2007-sys/PORTFOLIO
 
 This portfolio presents my academic background, demonstrated technical skills, selected software projects, and task-based contributions to the Newton School of Technology S&AI open-source programme.
