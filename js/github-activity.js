@@ -56,9 +56,9 @@
     const first = parseDate(sorted[0].date);
     const last = parseDate(sorted[sorted.length - 1].date);
     const gridStart = new Date(first);
-    gridStart.setDate(gridStart.getDate() - gridStart.getDay());
+    gridStart.setDate(gridStart.getDate() - ((gridStart.getDay() + 6) % 7));
     const gridEnd = new Date(last);
-    gridEnd.setDate(gridEnd.getDate() + (6 - gridEnd.getDay()));
+    gridEnd.setDate(gridEnd.getDate() + (6 - ((gridEnd.getDay() + 6) % 7)));
 
     const countByDate = new Map(sorted.map((day) => [day.date, Number(day.count) || 0]));
     const maxCount = Math.max(1, ...sorted.map((day) => Number(day.count) || 0));
@@ -117,7 +117,6 @@
     status.textContent = "SYNCING PUBLIC DATA";
     try {
       const response = await fetch(DATA_URL, {
-        cache: "no-store",
         headers: { "Accept": "application/json" }
       });
       if (!response.ok) throw new Error(`Contribution service returned ${response.status}`);
